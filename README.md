@@ -35,7 +35,8 @@ assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CA 5607'
 **Example 2**
 
 ```JavaScript
-// define a custom type t_reponse in the form of JSON, typing will do pattern matching based the type
+// define a custom type t_reponse in the form of JSON
+// typing will do pattern matching based the type
 var t_response = {
     status : {
         code : int,

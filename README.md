@@ -1,4 +1,4 @@
-typing.js: type checking and JSON schema validation
+JavaScript type checking and JSON schema validation
 ---------------------------------------------------
 
 A simple and intuitive type checking and JSON schema validation library for JavaScript.

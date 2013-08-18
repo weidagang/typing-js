@@ -4,30 +4,30 @@
 var util = require('util');
 var assert = require('assert');
 var typing = require('./typing.js');
-var t_any = typing.t_any;
-var t_null = typing.t_null;
-var t_nonnull = typing.t_nonnull;
-var t_func = typing.t_func;
-var t_int = typing.t_int;
-var t_str = typing.t_str;
-var t_array = typing.t_array;
-var t_tuple = typing.t_tuple;
-var t_table = typing.t_table;
-var t_or = typing.t_or;
-var t_and = typing.t_and;
+var any = typing.any;
+var none = typing.none;
+var nonnone = typing.nonnone;
+var func = typing.func;
+var int = typing.int;
+var str = typing.str;
+var array = typing.array;
+var tuple = typing.tuple;
+var table = typing.table;
+var or = typing.or;
+var and = typing.and;
 
 // test case
 function test_1() {
     var t_cmd_meta = {
-        program : t_str(1,30),
-        version : t_int(1,100),
-        version_name : t_str(1,30),
-        subcommands : t_array(t_str(1)),
+        program : str(1,30),
+        version : int(1,100),
+        version_name : str(1,30),
+        subcommands : array(str(1)),
         options : {
-            flags : t_table(t_str(0,1), t_str(2), t_str),
-            parameters : t_table(t_str(0,1), t_str(2), t_str, t_or(t_str, t_int))
+            flags : table(str(0,1), str(2), str),
+            parameters : table(str(0,1), str(2), str, or(str, int))
         },
-        usages : t_table(t_str, t_array(t_str(1)), t_array(t_str(1)), t_str, t_func)
+        usages : table(str, array(str(1)), array(str(1)), str, func)
     };
 
     typing.define('t_cmd_meta', t_cmd_meta);
@@ -66,84 +66,84 @@ function test_1() {
     console.log('Result: ' + matched);
 }
 
-function test_t_any(i) {
-    console.log('t_any: ' + typeof(t_any));
-    assert(typing.check(t_any, null), util.format('case %d.1 failed', i));
-    assert(typing.check(t_any, ''), util.format('case %d.2 failed', i));
-    assert(typing.check(t_any, 'hello typing.js'), util.format('case %d.3 failed', i));
-    assert(typing.check(t_any, function() {}), util.format('case %d.4 failed', i));
-    assert(typing.check(t_any, [1,2,3]), util.format('case %d.5 failed', i));
-    assert(typing.check(t_any, {}), util.format('case %d.6 failed', i));
+function test_any(i) {
+    console.log('any: ' + typeof(any));
+    assert(typing.check(any, null), util.format('case %d.1 failed', i));
+    assert(typing.check(any, ''), util.format('case %d.2 failed', i));
+    assert(typing.check(any, 'hello typing.js'), util.format('case %d.3 failed', i));
+    assert(typing.check(any, function() {}), util.format('case %d.4 failed', i));
+    assert(typing.check(any, [1,2,3]), util.format('case %d.5 failed', i));
+    assert(typing.check(any, {}), util.format('case %d.6 failed', i));
 }
 
-function test_t_str(i) {
-    assert(typing.check(t_str(0,0), null), util.format('case %d.1 failed', i));
-    assert(typing.check(t_str(0,0), ''), util.format('case %d.2 failed', i));
-    assert(typing.check(t_str(0,1), null), util.format('case %d.3 failed', i));
-    assert(typing.check(t_str(0,1), ''), util.format('case %d.4 failed', i));
-    assert(typing.check(t_str(1,1), 'q'), util.format('case %d.5 failed', i));
-    assert(!typing.check(t_str(1,1), null), util.format('case %d.6 failed', i));
-    assert(!typing.check(t_str(1,30), ''), util.format('case %d.7 failed', i));
-    assert(!typing.check(t_str(1,5), 'hello world'), util.format('case %d.8 failed', i));
-    assert(typing.check(t_str(1,5), 'hello'), util.format('case %d.9 failed', i));
-    assert(typing.check(t_str(1), 'hello'), util.format('case %d.10 failed', i));
-    assert(!typing.check(t_str(10), 'hello'), util.format('case %d.11 failed', i));
-    assert(!typing.check(t_str, ['a', 'b', 'c']), util.format('case %d.11 failed', i));
-    assert(!typing.check(t_str(0), ['a']), util.format('case %d.12 failed', i));
-    assert(!typing.check(t_str, {}), util.format('case %d.13 failed', i));
-    assert(!typing.check(t_str(0), {}), util.format('case %d.14 failed', i));
-    assert(!typing.check(t_str, function(){}), util.format('case %d.15 failed', i));
-    assert(!typing.check(t_str(0,1000), function(){}), util.format('case %d.16 failed', i));
+function test_str(i) {
+    assert(typing.check(str(0,0), null), util.format('case %d.1 failed', i));
+    assert(typing.check(str(0,0), ''), util.format('case %d.2 failed', i));
+    assert(typing.check(str(0,1), null), util.format('case %d.3 failed', i));
+    assert(typing.check(str(0,1), ''), util.format('case %d.4 failed', i));
+    assert(typing.check(str(1,1), 'q'), util.format('case %d.5 failed', i));
+    assert(!typing.check(str(1,1), null), util.format('case %d.6 failed', i));
+    assert(!typing.check(str(1,30), ''), util.format('case %d.7 failed', i));
+    assert(!typing.check(str(1,5), 'hello world'), util.format('case %d.8 failed', i));
+    assert(typing.check(str(1,5), 'hello'), util.format('case %d.9 failed', i));
+    assert(typing.check(str(1), 'hello'), util.format('case %d.10 failed', i));
+    assert(!typing.check(str(10), 'hello'), util.format('case %d.11 failed', i));
+    assert(!typing.check(str, ['a', 'b', 'c']), util.format('case %d.11 failed', i));
+    assert(!typing.check(str(0), ['a']), util.format('case %d.12 failed', i));
+    assert(!typing.check(str, {}), util.format('case %d.13 failed', i));
+    assert(!typing.check(str(0), {}), util.format('case %d.14 failed', i));
+    assert(!typing.check(str, function(){}), util.format('case %d.15 failed', i));
+    assert(!typing.check(str(0,1000), function(){}), util.format('case %d.16 failed', i));
 }
 
-function test_t_array(i) {
-    assert(typing.check(t_array, []), util.format('case %d.1 failed', i));
-    assert(typing.check(t_array, [1, 'foo', {}, null]), util.format('case %d.2 failed', i));
-    assert(!typing.check(t_array(t_str(1)), [null, 'foo']), util.format('case %d.3 failed', i));
-    assert(!typing.check(t_array(t_str(3)), ['', 'foo']), util.format('case %d.4 failed', i));
-    assert(!typing.check(t_array(t_str), [{}, 'foo']), util.format('case %d.5 failed', i));
-    assert(!typing.check(t_array(t_str), [[], 'foo']), util.format('case %d.6 failed', i));
-    assert(!typing.check(t_array(t_str(3,10)), [[], 'foo']), util.format('case %d.7 failed', i));
-    assert(!typing.check(t_array(t_str(3,10)), [function(){}, 'foo']), util.format('case %d.8 failed', i));
-    assert(typing.check(t_array(t_str(3,3)), ['foo', 'bar', 'pee', 'ijk']), util.format('case %d.9 failed', i));
-    assert(!typing.check(t_array(t_array(t_str(3,3))), ['foo', 'bar', 'pee', 'ijk']), util.format('case %d.10 failed', i));
-    assert(typing.check(t_array(t_array(t_str(3,3))), [['foo'], ['bar', 'pee', 'ijk']]), util.format('case %d.10 failed', i));
+function test_array(i) {
+    assert(typing.check(array, []), util.format('case %d.1 failed', i));
+    assert(typing.check(array, [1, 'foo', {}, null]), util.format('case %d.2 failed', i));
+    assert(!typing.check(array(str(1)), [null, 'foo']), util.format('case %d.3 failed', i));
+    assert(!typing.check(array(str(3)), ['', 'foo']), util.format('case %d.4 failed', i));
+    assert(!typing.check(array(str), [{}, 'foo']), util.format('case %d.5 failed', i));
+    assert(!typing.check(array(str), [[], 'foo']), util.format('case %d.6 failed', i));
+    assert(!typing.check(array(str(3,10)), [[], 'foo']), util.format('case %d.7 failed', i));
+    assert(!typing.check(array(str(3,10)), [function(){}, 'foo']), util.format('case %d.8 failed', i));
+    assert(typing.check(array(str(3,3)), ['foo', 'bar', 'pee', 'ijk']), util.format('case %d.9 failed', i));
+    assert(!typing.check(array(array(str(3,3))), ['foo', 'bar', 'pee', 'ijk']), util.format('case %d.10 failed', i));
+    assert(typing.check(array(array(str(3,3))), [['foo'], ['bar', 'pee', 'ijk']]), util.format('case %d.10 failed', i));
 }
 
-function test_t_tuple(i) {
-    assert(typing.check(t_tuple(t_int(1,100), t_str(1,100), t_func), [50, 'foobar', function(){}]), util.format('case %d.1 failed', i));
-    assert(!typing.check(t_tuple(t_int(1,100), t_str(1,100), t_func), [0, 'foobar', function(){}]), util.format('case %d.2 failed', i));
-    assert(typing.check(t_tuple(t_int(1,100), t_str(1,100), t_tuple(t_str(11, 11), t_str(1))), 
+function test_tuple(i) {
+    assert(typing.check(tuple(int(1,100), str(1,100), func), [50, 'foobar', function(){}]), util.format('case %d.1 failed', i));
+    assert(!typing.check(tuple(int(1,100), str(1,100), func), [0, 'foobar', function(){}]), util.format('case %d.2 failed', i));
+    assert(typing.check(tuple(int(1,100), str(1,100), tuple(str(11, 11), str(1))), 
         [100, 'foobar', ['13550013607', 'Tianfu Software Park C2']]), util.format('case %d.3 failed', i));
-    assert(!typing.check(t_tuple(t_int(1,100), t_str(1,100), t_tuple(t_str(11, 11), t_str(1))), 
+    assert(!typing.check(tuple(int(1,100), str(1,100), tuple(str(11, 11), str(1))), 
         [100, 'foobar', ['85432828', 'Tianfu Software Park C2']]), util.format('case %d.4 failed', i));
 }
 
-function test_t_table(i) {
-    assert(typing.check(t_table(t_int(1,100), t_str(1,1), t_str), [[1, 'h', 'host'], [2, 'p', null]]), util.format('case %d.1 failed', i)); 
-    assert(!typing.check(t_table(t_int(1,100), t_str(1,1), t_str), [[1, 'h', 'host'], [2, 'port', null]]), util.format('case %d.1 failed', i)); 
+function test_table(i) {
+    assert(typing.check(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'p', null]]), util.format('case %d.1 failed', i)); 
+    assert(!typing.check(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'port', null]]), util.format('case %d.1 failed', i)); 
 }
 
-function test_t_anonymous(i) {
+function test_anonymous(i) {
     console.log('case 5.1');
-    assert(typing.check({ id : t_int(1), name : t_str(1,20), score : t_int(0,100) }
+    assert(typing.check({ id : int(1), name : str(1,20), score : int(0,100) }
         , { id : 1, name : 'todd', score : 98 }), util.format('case %d.1 failed', i));
-    assert(!typing.check({ id : t_int(1), name : t_str(1,20), score : t_int(0,100) }
+    assert(!typing.check({ id : int(1), name : str(1,20), score : int(0,100) }
         , { id : 1, score : 6 }), util.format('case %d.2 failed', i));
-    assert(typing.check({ id : t_int(1), name : t_str(1,20), score : t_int(0,100), contact : t_tuple(t_str(11,11), t_str(1)) }
+    assert(typing.check({ id : int(1), name : str(1,20), score : int(0,100), contact : tuple(str(11,11), str(1)) }
         , { id : 1, score : 6, name : 'dagang', contact : ['13550013607', 'Tianfu Software Park C3'] }), util.format('case %d.3 failed', i));
-    assert(!typing.check({ id : t_int(1), name : t_str(1,20), score : t_int(0,100), contact : t_tuple(t_str(11,11), t_str(1)) }
+    assert(!typing.check({ id : int(1), name : str(1,20), score : int(0,100), contact : tuple(str(11,11), str(1)) }
         , { id : 1, score : 6, contact : ['85432828', 'Tianfu Software Park C3'] }), util.format('case %d.4 failed', i));
 }
 
 try {
     console.log(util.format('hello %s', 'typing.js'));
-    test_t_any(1);
-    test_t_str(2);
-    test_t_array(3);
-    test_t_tuple(4);
-    test_t_anonymous(5);
-    test_t_table(6);
+    test_any(1);
+    test_str(2);
+    test_array(3);
+    test_tuple(4);
+    test_anonymous(5);
+    test_table(6);
     test_1();
 
     console.log("ALL TEST CASES PASSED");

@@ -193,10 +193,10 @@ function is_func(arg) {
 
 //++++ type operations
 // and
-function t_and() {
+function and() {
     var _args = arguments;
-    var _t_and = function() {};
-    _t_and.__check__ = function(value) {
+    var _and = function() {};
+    _and.__check__ = function(value) {
         for (var i in _args) {
             if (true != check(_args[i], value)) {
                 return false;
@@ -204,17 +204,17 @@ function t_and() {
         }
         return true;
     };
-    return _t_and;
+    return _and;
 }
 
 // or 
-function t_or() {
-    console.log('+t_or(), type=%s', typeof(t_or)); 
+function or() {
+    console.log('+or(), type=%s', typeof(or)); 
     var _args = arguments;
-    var _t_or = function() {};
-    _t_or.__name__ = make_type_name(t_or, _args);
-    console.log('type name of t_or: %s', _t_or.__name__);
-    _t_or.__check__ = function(value) {
+    var _or = function() {};
+    _or.__name__ = make_type_name(or, _args);
+    console.log('type name of or: %s', _or.__name__);
+    _or.__check__ = function(value) {
         for (var i in _args) {
             if (true == check(_args[i], value)) {
                 return true;
@@ -222,137 +222,147 @@ function t_or() {
         }
         return false;
     };
-    return _t_or;
+    return _or;
 }
 //---- type operations
 
 
 //++++ built-in types
-// t_any: any type
-function t_any() {
+// any: any type
+function any() {
 }
 
-t_any.__name__ = 't_any';
+any.__name__ = 'any';
 
-t_any.__check__ = function(value) {
+any.__check__ = function(value) {
     return true;
 }
 
-// t_null: null type
-function t_null() {
+// none: null type
+function none() {
 }
 
-t_null.__name__ = 't_null';
+none.__name__ = 'none';
 
-t_null.__check__ = function(value) {
+none.__check__ = function(value) {
     return null == value; 
 };
 
-// t_nonnull: non-null type
-function t_nonnull() {
+// nonnone: non-none type
+function nonnone() {
 };
 
-t_null.__name__ = 't_nonnull';
+nonnone.__name__ = 'nonone';
 
-t_null.__check__ = function(value) {
+nonnone.__check__ = function(value) {
     return null != value;
 };
 
-// t_str: string type
-function t_str(min_len, max_len) {
+// str: string type
+function str(min_len, max_len) {
     console.log('min_len=%d, max_len=%d, arguments=%j', min_len, max_len, arguments);
     var _args = arguments;
-    var _t_str = function() {};
+    var _str = function() {};
 
-    _t_str.__name__ = make_type_name(t_str, _args); 
+    _str.__name__ = make_type_name(str, _args); 
 
-    console.log('str type name %s, %d, %d',  _t_str.__name__, min_len, max_len);
+    console.log('str type name %s, %d, %d',  _str.__name__, min_len, max_len);
 
-    _t_str.__check__ = function(value) {
-        console.log('t_str check, min_len=%d, max_len=%d, value=%s', min_len, max_len, value);
+    _str.__check__ = function(value) {
+        console.log('str check, min_len=%d, max_len=%d, value=%s', min_len, max_len, value);
         if (null == value) {
             if (min_len > 0) {
-                console.log('t_str check 1');
+                console.log('str check 1');
                 return false;
             }
             return true;
         }
 
         if (!is_str(value)) {
-            console.log('t_str check 2');
+            console.log('str check 2');
             return false;
         }
 
         if (null != min_len && value.length < min_len) {
-            console.log('t_str check 3, valuelen=%d, minlen=%d', value.length, min_len);
+            console.log('str check 3, valuelen=%d, minlen=%d', value.length, min_len);
             return false; 
         }
 
         if (null != max_len && value.length > max_len) {
-            console.log('t_str check 4');
+            console.log('str check 4');
             return false;
         }
 
         return true;
     };
 
-    return _t_str;
+    return _str;
 }
 
-t_str.__name__ = 't_str';
+str.__name__ = 'str';
 
-t_str.__check__ = function(value) {
+str.__check__ = function(value) {
     return null == value || is_str(value)    
 };
 
-// t_int: integer type
-function t_int(min, max) {
-    var _args = arguments;
-    var _t_int = function() {};
-    
-    _t_int.__name__ = make_type_name(t_int, _args);
+// bool: bool type
+function bool() {
+}
 
-    _t_int.__check__ = function(value) {
+bool.__name__ = 'bool';
+
+bool.__check__ = function(value) {
+    return 'boolean' == typeof(value);
+}
+
+// int: integer type
+function int(min, max) {
+    var _args = arguments;
+    var _int = function() {};
+    
+    _int.__name__ = make_type_name(int, _args);
+
+    _int.__check__ = function(value) {
         if (null == value) {
             return false;
         }
 
         if (!is_int(value)) {
-            console.log('t_int check 1');
+            console.log('int check 1');
             return false;
         }
 
         if (null != min && value < min) {
-            console.log('t_int check 2, value=%d, min=%d', value, min);
+            console.log('int check 2, value=%d, min=%d', value, min);
             return false;
         }
 
         if (null != max && value > max) {
-            console.log('t_int check 3');
+            console.log('int check 3');
             return false;
         }
 
-        console.log('t_int check 4');
+        console.log('int check 4');
         return true;
     };
 
-    return _t_int;
+    return _int;
 }
 
-t_int.__name__ = 't_int';
+int.__name__ = 'int';
 
-t_int.__check__ = function(value) {
+int.__check__ = function(value) {
     return null != value && is_int(value);
 }
 
-// t_enum: enumeration
-function t_enum() {
+// oneof: enumeration
+function oneof() {
     var _args = arguments;
-    var _t_enum = function() {}; 
+    var _oneof = function() {}; 
     
-    _t_enum.__name__ = make_type_name(t_enum, _args);
+    _oneof.__name__ = make_type_name(oneof, _args);
 
-    _t_enum.__check__ = function(value) {
+    _oneof.__check__ = function(value) {
         for (var i in _args) {
             if (_args[i] == value) {
                 return true;
@@ -361,31 +371,31 @@ function t_enum() {
         return false;
     };
 
-    return _t_enum;
+    return _oneof;
 }
 
-// t_func: function type
-function t_func() {
+// func: function type
+function func() {
 }
 
-t_func.__name__ = 't_func';
+func.__name__ = 'func';
 
-t_func.__check__ = function(value) {
+func.__check__ = function(value) {
     return is_func(value);
 };
 
-// t_array: array type
-function t_array(t_item) {
+// array: array type
+function array(t_item) {
     if (!is_valid_type(t_item)) {
-        throw new Error('Invalid element type for t_array: ' + t_item);
+        throw new Error('Invalid element type for array: ' + t_item);
     }
 
-    var _t_array = function() {};
+    var _array = function() {};
     
-    _t_array.__name__ = make_type_name(t_array, t_item.__name__);
+    _array.__name__ = make_type_name(array, t_item.__name__);
 
-    _t_array.__check__ = function(value) {
-        console.log('t_array check, t_iterm=%s, value=%j', t_item.__name__, value);
+    _array.__check__ = function(value) {
+        console.log('array check, t_iterm=%s, value=%j', t_item.__name__, value);
         if (!is_array(value)) {
             return false;
         }
@@ -397,45 +407,45 @@ function t_array(t_item) {
         return true;
     };
 
-    return _t_array;
+    return _array;
 }
 
-t_array.__name__ = 't_array';
+array.__name__ = 'array';
 
-t_array.__check__ = t_array(t_any).__check__;
+array.__check__ = array(any).__check__;
 
-// t_tuple: tuple type
-function t_tuple() {
+// tuple: tuple type
+function tuple() {
     var _args = arguments;
     var _arg_names = [];
-    console.log('+t_tuple(), args:%j', _args);
+    console.log('+tuple(), args:%j', _args);
     for (var i in _args) {
         if (!is_valid_type(_args[i])) {
-            throw new Error('Invalid element type for t_tuple ' + _args[i]);
+            throw new Error('Invalid element type for tuple ' + _args[i]);
         }
         
         console.log('arg[%d]: %s', i, _args[i].__name__);
         _arg_names.push(_args[i].__name__);
     }
 
-    var _t_tuple = function() {};
+    var _tuple = function() {};
 
-    _t_tuple.__name__ = make_type_name(t_tuple, _arg_names);
+    _tuple.__name__ = make_type_name(tuple, _arg_names);
 
-    _t_tuple.__check__ = function(value) {
+    _tuple.__check__ = function(value) {
         if (!is_array(value)) {
-            console.log('t_tuple() check 1, args:%j', _args);
+            console.log('tuple() check 1, args:%j', _args);
             return false;
         }
 
         if (_args.length != value.length) {
-            console.log('t_tuple() check 2, args:%j', _args);
+            console.log('tuple() check 2, args:%j', _args);
             return false;
         }
 
         for (var i = 0; i < _args.length; ++i) {
             if (true != check(_args[i], value[i])) {
-                console.log('t_tuple() check 3, type=%s, value=%s', _args[i].__name__, value[i]);
+                console.log('tuple() check 3, type=%s, value=%s', _args[i].__name__, value[i]);
                 return false;
             }
         }
@@ -443,27 +453,44 @@ function t_tuple() {
         return true;
     };
 
-    return _t_tuple;
+    return _tuple;
 }
 
-// t_table: table type
-function t_table() {
+// table: table type
+function table() {
     var _args = arguments;
-    var _t_table = function() {};
+    var _table = function() {};
 
-    console.log('+t_table(), n: %d, args:%j', _args.length, _args);
+    console.log('+table(), n: %d, args:%j', _args.length, _args);
     for (var i = 0; i < _args.length; ++i) {
         console.log('arg %d, %s', i, _args[i].__name__);
     }
-    _t_table.__name__ = make_type_name(t_table, _args);
-    console.log('table type name: ' + _t_table.__name__);
-    _t_table.__check__ = t_array(t_tuple.apply(null, _args)).__check__;
-    return _t_table;
+    _table.__name__ = make_type_name(table, _args);
+    console.log('table type name: ' + _table.__name__);
+    _table.__check__ = array(tuple.apply(null, _args)).__check__;
+    return _table;
 }
 //---- built-in types
+
 
 //++++ module exports
 module.exports = {
     'define' : define,
-    'check' : check
+    'check' : check,
+
+    'and' : and,
+    'or' : or,
+
+    'any' : any,
+    'none' : none,
+    'nonnone' : nonnone,
+    'bool' : bool,
+    'str' : str,
+    'int' : int,
+    'oneof' : oneof,
+    'func' : func,
+    'array' : array,
+    'tuple' : tuple,
+    'table' : table
 }
+//---- module exports

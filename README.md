@@ -23,7 +23,7 @@ var tuple = typing.tuple;
 var table = typing.table;
 ````
 
-* Define custom type with built-in types
+**Define custom type with built-in types**
 
 ```JavaScript
 // int(1): integer >= 1;
@@ -38,7 +38,7 @@ assert(typing.check(t_employee, [123, 'todd', ['1355-0011-107', 'CA 5607']]));
 assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CA 5607']]));
 ```
 
-** Define custom type in JSON **
+**Define custom type in JSON**
 
 ```JavaScript
 // typing will do pattern matching based the type defined in JSON
@@ -81,7 +81,7 @@ assert(typing.check(t_response, {
 });
 ```
 
-** Define recursive type ** 
+**Define recursive type** 
 ```Javascript
 // define a binary tree type
 // type(name): define a lazy resolved type

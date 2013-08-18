@@ -110,10 +110,13 @@ function error() {
     console.error(arguments);
 }
 
-function make_type_name(fn, args) {
-    console.log('+make_type_name(), fn=%s, args=%j', typeof(fn), args);
+function generate_type_name(fn, args) {
+    console.log('+generate_type_name(), fn=%s, args=%j', typeof(fn), args);
     var name = fn.name;
-    if (is_str(args)) {
+    if (null != args.__name__) {
+        name += '(' + args.__name__ + ')'; 
+    }
+    else if (is_str(args)) {
         name += '(' + args + ')'; 
     }
     else if (is_args(args) || is_array(args)) {
@@ -212,7 +215,7 @@ function or() {
     console.log('+or(), type=%s', typeof(or)); 
     var _args = arguments;
     var _or = function() {};
-    _or.__name__ = make_type_name(or, _args);
+    _or.__name__ = generate_type_name(or, _args);
     console.log('type name of or: %s', _or.__name__);
     _or.__check__ = function(value) {
         for (var i in _args) {
@@ -238,24 +241,26 @@ any.__check__ = function(value) {
     return true;
 }
 
-// none: null type
-function none() {
+// none: nullable type, extends other types to accept null value
+function nullable(type) {
+    console.log('+nullable(), typeof(type)=' + typeof(type));
+    function _nullable() {
+    }
+
+    _nullable.__name__ = generate_type_name(nullable, type);
+    console.log("nullable type name: " + _nullable.__name__);
+
+    _nullable.__check__ = function(value) {
+        return null == value || check(type, value); 
+    };
+
+    return _nullable;
 }
 
-none.__name__ = 'none';
+nullable.__name__ = 'nullable';
 
-none.__check__ = function(value) {
+nullable.__check__ = function(value) {
     return null == value; 
-};
-
-// nonnone: non-none type
-function nonnone() {
-};
-
-nonnone.__name__ = 'nonone';
-
-nonnone.__check__ = function(value) {
-    return null != value;
 };
 
 // str: string type
@@ -264,7 +269,7 @@ function str(min_len, max_len) {
     var _args = arguments;
     var _str = function() {};
 
-    _str.__name__ = make_type_name(str, _args); 
+    _str.__name__ = generate_type_name(str, _args); 
 
     console.log('str type name %s, %d, %d',  _str.__name__, min_len, max_len);
 
@@ -320,7 +325,7 @@ function int(min, max) {
     var _args = arguments;
     var _int = function() {};
     
-    _int.__name__ = make_type_name(int, _args);
+    _int.__name__ = generate_type_name(int, _args);
 
     _int.__check__ = function(value) {
         if (null == value) {
@@ -360,7 +365,7 @@ function oneof() {
     var _args = arguments;
     var _oneof = function() {}; 
     
-    _oneof.__name__ = make_type_name(oneof, _args);
+    _oneof.__name__ = generate_type_name(oneof, _args);
 
     _oneof.__check__ = function(value) {
         for (var i in _args) {
@@ -392,7 +397,7 @@ function array(t_item) {
 
     var _array = function() {};
     
-    _array.__name__ = make_type_name(array, t_item.__name__);
+    _array.__name__ = generate_type_name(array, t_item.__name__);
 
     _array.__check__ = function(value) {
         console.log('array check, t_iterm=%s, value=%j', t_item.__name__, value);
@@ -430,7 +435,7 @@ function tuple() {
 
     var _tuple = function() {};
 
-    _tuple.__name__ = make_type_name(tuple, _arg_names);
+    _tuple.__name__ = generate_type_name(tuple, _arg_names);
 
     _tuple.__check__ = function(value) {
         if (!is_array(value)) {
@@ -465,7 +470,7 @@ function table() {
     for (var i = 0; i < _args.length; ++i) {
         console.log('arg %d, %s', i, _args[i].__name__);
     }
-    _table.__name__ = make_type_name(table, _args);
+    _table.__name__ = generate_type_name(table, _args);
     console.log('table type name: ' + _table.__name__);
     _table.__check__ = array(tuple.apply(null, _args)).__check__;
     return _table;
@@ -482,8 +487,7 @@ module.exports = {
     'or' : or,
 
     'any' : any,
-    'none' : none,
-    'nonnone' : nonnone,
+    'nullable' : nullable,
     'bool' : bool,
     'str' : str,
     'int' : int,

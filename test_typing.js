@@ -5,10 +5,10 @@ var util = require('util');
 var assert = require('assert');
 var typing = require('./typing.js');
 var any = typing.any;
-var none = typing.none;
-var nonnone = typing.nonnone;
+var nullable = typing.nullable;
 var func = typing.func;
 var int = typing.int;
+var bool = typing.bool;
 var str = typing.str;
 var array = typing.array;
 var tuple = typing.tuple;
@@ -17,7 +17,7 @@ var or = typing.or;
 var and = typing.and;
 
 // test case
-function test_1() {
+function test_cmd_meta() {
     var t_cmd_meta = {
         program : str(1,30),
         version : int(1,100),
@@ -108,6 +108,8 @@ function test_array(i) {
     assert(typing.check(array(str(3,3)), ['foo', 'bar', 'pee', 'ijk']), util.format('case %d.9 failed', i));
     assert(!typing.check(array(array(str(3,3))), ['foo', 'bar', 'pee', 'ijk']), util.format('case %d.10 failed', i));
     assert(typing.check(array(array(str(3,3))), [['foo'], ['bar', 'pee', 'ijk']]), util.format('case %d.10 failed', i));
+    assert(!typing.check(array, null), util.format('case %d.11 failed', i));
+    assert(!typing.check(array(int), null), util.format('case %d.12 failed', i));
 }
 
 function test_tuple(i) {
@@ -117,15 +119,16 @@ function test_tuple(i) {
         [100, 'foobar', ['13550013607', 'Tianfu Software Park C2']]), util.format('case %d.3 failed', i));
     assert(!typing.check(tuple(int(1,100), str(1,100), tuple(str(11, 11), str(1))), 
         [100, 'foobar', ['85432828', 'Tianfu Software Park C2']]), util.format('case %d.4 failed', i));
+    assert(!typing.check(tuple(int(1,100), str(1,100), func), null), util.format('case %d.5 failed', i));
 }
 
 function test_table(i) {
     assert(typing.check(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'p', null]]), util.format('case %d.1 failed', i)); 
-    assert(!typing.check(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'port', null]]), util.format('case %d.1 failed', i)); 
+    assert(!typing.check(table(int(1,100), str(1,1), str), null), util.format('case %d.2 failed', i)); 
+    assert(!typing.check(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'port', null]]), util.format('case %d.3 failed', i)); 
 }
 
 function test_anonymous(i) {
-    console.log('case 5.1');
     assert(typing.check({ id : int(1), name : str(1,20), score : int(0,100) }
         , { id : 1, name : 'todd', score : 98 }), util.format('case %d.1 failed', i));
     assert(!typing.check({ id : int(1), name : str(1,20), score : int(0,100) }
@@ -136,6 +139,40 @@ function test_anonymous(i) {
         , { id : 1, score : 6, contact : ['85432828', 'Tianfu Software Park C3'] }), util.format('case %d.4 failed', i));
 }
 
+function test_nullable(i) {
+    assert(typing.check(nullable(str), null), util.format('case %d.1 failed', i));
+    assert(typing.check(nullable(int), null), util.format('case %d.2 failed', i));
+    assert(typing.check(nullable(bool), null), util.format('case %d.3 failed', i));
+    assert(typing.check(nullable(func), null), util.format('case %d.4 failed', i));
+    assert(typing.check(nullable(array), null), util.format('case %d.6 failed', i));
+    assert(typing.check(nullable(tuple(int, str)), null), util.format('case %d.7 failed', i));
+    assert(typing.check(nullable(table(int(1,10), str(0,1))), null), util.format('case %d.8 failed', i));
+}
+
+function test_int(i) {
+    console.log('test_int');
+    assert(!typing.check(int, null), util.format('case %d.1 failed', i));
+    assert(!typing.check(int, 0.1), util.format('case %d.2 failed', i));
+    assert(typing.check(int, 0.0), util.format('case %d.3 failed', i));
+    assert(typing.check(int, 0), util.format('case %d.4 failed', i));
+    assert(typing.check(int, 123), util.format('case %d.5 failed', i));
+    assert(typing.check(int, -123), util.format('case %d.6 failed', i));
+    assert(!typing.check(int(0,0), -1), util.format('case %d.7 failed', i));
+    assert(typing.check(int(0,0), 0), util.format('case %d.8 failed', i));
+    assert(!typing.check(int(0,0), 2), util.format('case %d.9 failed', i));
+    assert(typing.check(int(0,10), 0), util.format('case %d.10 failed', i));
+    assert(!typing.check(int(0,10), -1), util.format('case %d.11 failed', i));
+    assert(typing.check(int(0,10), 10), util.format('case %d.12 failed', i));
+    assert(!typing.check(int(0,10), 11), util.format('case %d.13 failed', i));
+    assert(typing.check(int(-100,-10), -100), util.format('case %d.14 failed', i));
+    assert(typing.check(int(-100,-10), -10), util.format('case %d.15 failed', i));
+    assert(!typing.check(int(-100,-10), -101), util.format('case %d.16 failed', i));
+    assert(!typing.check(int(-100,-10), -9), util.format('case %d.17 failed', i));
+    assert(typing.check(int, 10000000000000000), util.format('case %d.18 failed', i));
+    assert(typing.check(int, Math.pow(10,100)), util.format('case %d.19 failed', i));
+    assert(typing.check(int, 1e8), util.format('case %d.20 failed', i));
+}
+
 try {
     console.log(util.format('hello %s', 'typing.js'));
     test_any(1);
@@ -144,7 +181,10 @@ try {
     test_tuple(4);
     test_anonymous(5);
     test_table(6);
-    test_1();
+    test_nullable(7);
+    test_int(8);
+
+    test_cmd_meta();
 
     console.log("ALL TEST CASES PASSED");
 }

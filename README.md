@@ -23,7 +23,7 @@ var tuple = typing.tuple;
 var table = typing.table;
 ````
 
-** Define custom type with built-in types **
+* Define custom type with built-in types
 
 ```JavaScript
 // int(1): integer >= 1;

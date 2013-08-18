@@ -1,7 +1,7 @@
 {
   "name": "typing",
   "version": "0.1.2",
-  "description": "A simple and intuitive type definition and validation library for JavaScript",
+  "description": "A type checking and JSON schema validation library",
   "main": "typeing.js",
   "scripts": {
     "test": "test_typing.js"

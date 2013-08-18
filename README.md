@@ -19,6 +19,7 @@ var table = typing.table;
 ````
 
 **Define custom type with built-in types**
+
 ```JavaScript
 // int(1): matches integer >= 1;
 // str(1,50): matches string with length between 1 to 50;
@@ -33,6 +34,7 @@ assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CA 5607'
 ```
 
 **Define custom type in JSON**
+
 ```JavaScript
 // typing will do pattern matching based the type
 var t_response = {
@@ -53,5 +55,12 @@ assert(typing.check(t_response, {
         [2, 'April', ['1582-0011-108', 'CA 5607']],
         [3, 'Rex', ['1522-1011-138', 'CA 1008']]
     ]
+});
+
+assert(typing.check(t_response, {
+    status : { 
+        code : 404, 
+        message : 'NOT FOUND'
+    }
 });
 ```

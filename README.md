@@ -38,7 +38,7 @@ can be used to match employee record
 }
 ```
 
-```typing.check(<type>, <data>)``` will do pattern matching based on the structure and recursively check the type of each property. 
+```typing.check(<type>, <data>)``` will do pattern matching between type and data based on the structure and recursively check the type of each property. 
 
 ####Examples:
 

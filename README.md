@@ -1,4 +1,4 @@
-Typing.js: simple and intuitive type checking for JavaScript
+Typing.js: simple and intuitive type checking for Javascript
 ------------------------------------------------------------
 
 A simple and intuitive type checking and JSON schema validation library for Javascript.

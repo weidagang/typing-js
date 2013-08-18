@@ -137,4 +137,4 @@ assert(typing.check('tree', {
         right : { value : 5 }
     }
 }));
-
+```

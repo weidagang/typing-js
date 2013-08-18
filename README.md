@@ -1,7 +1,7 @@
 typing.js
 =========
 
-A simple and intuitive object type definition and validation library for JavaScript.
+A simple and intuitive object type defining and validation library for JavaScript.
 
 
 ###Example:

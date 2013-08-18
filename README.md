@@ -21,7 +21,7 @@ bool.__check__ = function(value) { return 'boolean' == typeof(value); }
 ```Javascript
 tuple(int(1,10000), str(1,50), tuple(str, str)) 
 ```
-can be used to match 
+can be used to match employee record
 ```Javascript
 [123, 'todd', ['1354-0013-628', 'CD 5037']]
 ```

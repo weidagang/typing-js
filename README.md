@@ -1,6 +1,6 @@
 ###Typing.js: a simple and intuitive type checking library for JavaScript###
 
-###Usage:
+####Usage:
 
 ```Javascript
 typing.check(<type>, <data>); //true: matched; false: not matched
@@ -32,7 +32,7 @@ bool.__check__ = function(value) { return 'boolean' == typeof(value); }
 
 ```typing.check(<type>, <data>)``` will do pattern matching based on the structure and recursively check the type of each property. 
 
-###Example:
+####Examples:
 
 ```JavaScript
 // import module

@@ -6,7 +6,7 @@ A simple and intuitive JSON schema validation library for JavaScript.
 ###Usage:
 
 ```Javascript
-typing.check(<type-definition>, <data>);
+typing.check(<type-definition>, <data>); //true: matched; false: not matched
 ```
 
 ###Example:

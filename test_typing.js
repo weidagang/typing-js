@@ -5,6 +5,7 @@ var util = require('util');
 var assert = require('assert');
 var typing = require('./typing.js');
 
+var type = typing.type;
 var any = typing.any;
 var nullable = typing.nullable;
 var func = typing.func;
@@ -188,6 +189,30 @@ function test_cmd_meta(i) {
     console.log(util.format('test suit %d passed', i));
 }
 
+function test_recursion(i) {
+    var t_tree = {
+        value : int,
+        left : nullable(type('tree')),
+        right : nullable(type('tree'))
+    };
+
+    typing.define('tree', t_tree);
+
+    assert(typing.check('tree', { 
+        value : 1, 
+        left : { 
+            value : 2, 
+            left : { value : 3 }
+        },
+        right : { 
+            value : 4, 
+            right : { value : 5 }
+        }
+    }));
+
+    console.log(util.format('test suit %d passed', i));
+}
+
 // main
 try {
     test_any(1);
@@ -199,6 +224,7 @@ try {
     test_nullable(7);
     test_int(8);
     test_cmd_meta(9);
+    test_recursion(10);
 
     console.log("ALL TEST CASES PASSED");
 }

@@ -1,4 +1,5 @@
 // dependencies
+//var util = require('util');
 
 // The core structure to store type definitions
 var types = {
@@ -21,6 +22,7 @@ function define(name, definition) {
 
 // check type 
 function check(type, value) { 
+    //console.log("+check(), type=%s, value=%s", util.inspect(type), util.inspect(value));
     // if the <type> has __check__ function, then just use it
     if (is_func(type.__check__)) {
         return type.__check__(value);
@@ -32,9 +34,6 @@ function check(type, value) {
         }
 
         for (var prop in type) {
-            if (undefined === value[prop]) {
-                return false;
-            }
             var matched = check(type[prop], value[prop]);
             if (true != matched) {
                 return false;
@@ -61,14 +60,13 @@ function is_valid_type(def) {
     if (is_func(def.__check__)) {
         return true;
     }
-
-    if (is_str(def)) {
+    else if (is_str(def)) {
         if (name == def || null != types[name]) {
             return true;
         }
+        return false;
     }
-
-    if (is_json(def)) {
+    else if (is_json(def)) {
         for (var prop in def) {
             if (!is_valid_type(def[prop])) {
                 console.error('Invalid type: %j', def[prop]);
@@ -80,6 +78,19 @@ function is_valid_type(def) {
     }
 
     return false;
+}
+
+// lazy resolving type
+function type(name) {
+    var _type = function() {};
+
+    _type.__name__ = name;
+
+    _type.__check__  = function(value) {
+        return (null != types[name]) && check(types[name], value);
+    };
+
+    return _type;
 }
 
 //-- core functions 
@@ -429,6 +440,7 @@ function table() {
 module.exports = {
     'define' : define,
     'check' : check,
+    'type' : type,
 
     'and' : and,
     'or' : or,

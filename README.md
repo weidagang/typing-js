@@ -1,5 +1,4 @@
-Typing.js: simple and intuitive type checking for JS
-----------------------------------------------------
+###Typing.js: a simple and intuitive type checking library for JavaScript###
 
 ###Usage:
 

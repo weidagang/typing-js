@@ -1,4 +1,4 @@
-###Typing.js: A type checking and JSON schema validation library
+###Typing.js: a type checking and JSON schema validation library
 
 ####Usage:
 

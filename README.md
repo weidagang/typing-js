@@ -8,7 +8,7 @@ typing.check(<type>, <data>); //true: matched; false: not matched
 
 where ```<type>``` can be:
 
-1) Function with ```__name__``` and ```__check__``` property, i.e. the built-in type bool is defined as:
+1) Function with ```__name__``` and ```__check__``` property, i.e. the built-in type ```bool``` is defined as:
 
 ```Javascript
 function bool() {}

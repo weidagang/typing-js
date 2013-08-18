@@ -31,10 +31,10 @@ var table = typing.table;
 // tuple: matches JavaScript array with specified type and number of elements
 var t_employee = tuple(int(1), str(1,50), tuple(str,str));
 
-// valid t_employee data
+// matched
 assert(typing.check(t_employee, [123, 'todd', ['1355-0011-107', 'CA 5607']]));
 
-// invalid t_employee data, id must be >= 1
+// not matched, id must be >= 1
 assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CA 5607']]));
 ```
 
@@ -50,6 +50,7 @@ var t_response = {
     data : nullable(table(int(1), str(1,50), tuple(str,str)))
 };
 
+// matched
 assert(typing.check(t_response, {
     status : { 
         code : 200, 
@@ -62,10 +63,18 @@ assert(typing.check(t_response, {
     ]
 });
 
+// matched
 assert(typing.check(t_response, {
     status : { 
         code : 404, 
         message : 'NOT FOUND'
+    }
+});
+
+// not matched, status.message is missing
+assert(typing.check(t_response, {
+    status : {
+        code : 300
     }
 });
 ```

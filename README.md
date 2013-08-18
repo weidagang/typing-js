@@ -41,7 +41,7 @@ assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CA 5607'
 **Define custom type in JSON**
 
 ```JavaScript
-// typing will do pattern matching based the type
+// typing will do pattern matching based the type defined in JSON
 // nullable : null or the wrapped type
 // table: equivalent of array(tuple)
 var t_response = {

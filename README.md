@@ -6,8 +6,34 @@ A simple and intuitive JSON schema validation library for JavaScript.
 ###Usage:
 
 ```Javascript
-typing.check(<type-definition>, <data>); //true: matched; false: not matched
+typing.check(<type>, <data>); //true: matched; false: not matched
 ```
+
+<type> can be:
+
+1) function with __name__ and __check__ property, i.e. the built-in type bool is defined as:
+
+```Javascript
+function bool() {}
+bool.__name__ = 'bool';
+bool.__check__ = function(value) { return 'boolean' == typeof(value); }
+```
+
+typing.check(<type>, <data>) will call <type>.__check__(<data>) in this case. 
+
+2) JSON object, such as:
+
+```Javascript
+{
+    status : {
+        code : int,
+        message : str
+    },
+    data : table(int, str, tuple(str, str))
+}
+```
+
+typing.check(<type>, <data>) will do pattern matching based on the structure and recursively check the type of each property. 
 
 ###Example:
 

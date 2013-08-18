@@ -16,7 +16,7 @@ bool.__name__ = 'bool';
 bool.__check__ = function(value) { return 'boolean' == typeof(value); }
 ```
 
-```typing.check(<type>, <data>)``` will call ```<type>.__check__(<data>)``` in this case. 
+```typing.check(<type>, <data>)``` will call ```<type>.__check__(<data>)``` in this case. Before defining your own types this way, be aware that typing comes with a set of built-in types, which can be used to construct complex types. 
 
 2) JSON object, such as:
 

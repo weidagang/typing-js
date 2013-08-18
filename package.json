@@ -1,0 +1,26 @@
+{
+  "name": "typing",
+  "version": "0.1.1",
+  "description": "A simple and intuitive type definition and validation library for JavaScript",
+  "main": "typeing.js",
+  "scripts": {
+    "test": "test_typing.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/weidagang/typing-js.git"
+  },
+  "keywords": [
+    "schema",
+    "jsschema",
+    "js-schema",
+    "type",
+    "typing",
+    "validation"
+  ],
+  "author": "weidagang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weidagang/typing-js/issues"
+  }
+}

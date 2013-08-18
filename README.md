@@ -11,7 +11,7 @@ typing.check(<type>, <data>); //true: matched; false: not matched
 
 where <type> can be:
 
-1) Function with __name__ and __check__ property, i.e. the built-in type bool is defined as:
+1) Function with ```__name__``` and ```__check__``` property, i.e. the built-in type bool is defined as:
 
 ```Javascript
 function bool() {}
@@ -19,7 +19,7 @@ bool.__name__ = 'bool';
 bool.__check__ = function(value) { return 'boolean' == typeof(value); }
 ```
 
-typing.check(<type>, <data>) will call <type>.__check__(<data>) in this case. 
+```typing.check(<type>, <data>)``` will call ```<type>.__check__(<data>)``` in this case. 
 
 2) JSON object, such as:
 
@@ -33,7 +33,7 @@ typing.check(<type>, <data>) will call <type>.__check__(<data>) in this case.
 }
 ```
 
-typing.check(<type>, <data>) will do pattern matching based on the structure and recursively check the type of each property. 
+```typing.check(<type>, <data>)``` will do pattern matching based on the structure and recursively check the type of each property. 
 
 ###Example:
 

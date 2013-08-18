@@ -9,9 +9,9 @@ A simple and intuitive type checking and JSON schema validation library for Java
 typing.check(<type>, <data>); //true: matched; false: not matched
 ```
 
-<type> can be:
+where <type> can be:
 
-1) function with __name__ and __check__ property, i.e. the built-in type bool is defined as:
+1) Function with __name__ and __check__ property, i.e. the built-in type bool is defined as:
 
 ```Javascript
 function bool() {}

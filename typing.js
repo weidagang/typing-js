@@ -393,8 +393,13 @@ function tuple() {
         if (!is_valid_type(_args[i])) {
             throw new Error('Invalid element type for tuple ' + _args[i]);
         }
-
-        _arg_names.push(_args[i].__name__);
+        
+        if (_args[i].__name__) {
+            _arg_names.push(_args[i].__name__);
+        }
+        else if (is_json(_args[i])) {
+            _arg_names.push('JSON');
+        }
     }
 
     var _tuple = function() {};

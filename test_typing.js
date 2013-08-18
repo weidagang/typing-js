@@ -78,6 +78,8 @@ function test_tuple(i) {
     assert(!typing.check(tuple(int(1,100), str(1,100), tuple(str(11, 11), str(1))), 
         [100, 'foobar', ['85432828', 'Tianfu Software Park C2']]), util.format('case %d.4 failed', i));
     assert(!typing.check(tuple(int(1,100), str(1,100), func), null), util.format('case %d.5 failed', i));
+    assert(typing.check(tuple(int(1,100), str(1,100), {phone : str, address : str}), [23, 'todd', {phone : '13550013607', address : 'CD 5037'}])
+        , util.format('case %d.6 failed', i));
 
     console.log(util.format('test suit %d passed', i));
 }

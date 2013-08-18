@@ -12,11 +12,15 @@
   },
   "keywords": [
     "schema",
+    "json schema",
+    "json-schema",
     "jsschema",
     "js-schema",
+    "schema validation",
     "type",
     "typing",
-    "validation"
+    "type checking",
+    "type validation"
   ],
   "author": "weidagang",
   "license": "MIT",

@@ -26,9 +26,9 @@ var table = typing.table;
 **Define custom type with built-in types**
 
 ```JavaScript
-// int(1): matches integer >= 1;
-// str(1,50): matches string with length between 1 to 50;
-// tuple: matches JavaScript array with specified type and number of elements
+// int(1): integer >= 1;
+// str(1,50): string with length between 1 to 50;
+// tuple: array with specified type and number of elements
 var t_employee = tuple(int(1), str(1,50), tuple(str,str));
 
 // matched
@@ -42,6 +42,8 @@ assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CA 5607'
 
 ```JavaScript
 // typing will do pattern matching based the type
+// nullable : null or the wrapped type
+// table: equivalent of array(tuple)
 var t_response = {
     status : {
         code : int,

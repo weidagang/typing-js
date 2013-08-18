@@ -3,6 +3,11 @@ typing.js
 
 A simple and intuitive object type defining and validation library for JavaScript.
 
+###Usage:
+
+```Javascript
+typing.check(<type-definition>, <data>);
+```
 
 ###Example:
 

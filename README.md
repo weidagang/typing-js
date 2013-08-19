@@ -3,10 +3,10 @@
 ####Usage:
 
 ```Javascript
-typing.check(<type>, <data>); //true: matched; false: not matched
+typing.check(type, data); //true: matched; false: not matched
 ```
 
-where ```<type>``` can be:
+where ```type``` can be:
 
 1) Function with ```__name__``` and ```__check__``` property, i.e. the built-in type ```bool``` is defined as:
 
@@ -16,7 +16,7 @@ bool.__name__ = 'bool';
 bool.__check__ = function(value) { return 'boolean' == typeof(value); }
 ```
 
-```typing.check(<type>, <data>)``` will call ```<type>.__check__(<data>)``` in this case. You can define your own types this way, however be aware that typing comes with a set of built-in types, which can be used to construct complex types. i.e. 
+```typing.check(type, data)``` will call ```type.__check__(data)``` in this case. You can define your own types this way, however be aware that typing comes with a set of built-in types, which can be used to construct complex types. i.e. 
 
 ```Javascript
 tuple(int(1,10000), str(1,50), tuple(str, str)) 
@@ -38,7 +38,7 @@ can be used to match employee record
 }
 ```
 
-```typing.check(<type>, <data>)``` will perform pattern matching between type and data based on the structure and recursively check the type of each property. 
+```typing.check(type, data)``` will perform pattern matching between type and data based on the structure and recursively check the type of each property. 
 
 3) String, i.e.:
 

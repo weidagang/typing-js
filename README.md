@@ -114,16 +114,14 @@ assert(typing.check(t_response, {
 
 **3. Define recursive type** 
 ```Javascript
-// define a binary tree type
+// define a recursive binary tree type under the name 'tree'
+// nullalbe(type): extend the wrapped type to accept null value
 // type(name): define a lazy resolved type
-var t_tree = {
+typing.define('tree', {
     value : int,
     left : nullable(type('tree')),
     right : nullable(type('tree'))
-};
-
-// define type t_tree under the name 'tree'
-typing.define('tree', t_tree);
+});
 
 // matched
 assert(typing.check('tree', {

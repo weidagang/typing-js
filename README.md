@@ -38,7 +38,17 @@ can be used to match employee record
 }
 ```
 
-```typing.check(<type>, <data>)``` will do pattern matching between type and data based on the structure and recursively check the type of each property. 
+```typing.check(<type>, <data>)``` will perform pattern matching between type and data based on the structure and recursively check the type of each property. 
+
+3) string, such as: 'matrix_3x3'
+
+```Javascript
+// define 3x3 matrix type under the name 'matrix_3x3'
+typing.define('matrix_3x3', tuple(tuple(int, int, int), tuple(int, int, int), tuple(int, int, int)));
+
+// check type with the type name
+assert(typing.check('matrix_3x3', [[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
+```
 
 ####Examples:
 

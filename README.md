@@ -8,7 +8,9 @@ typing.check(type, data); //true: matched; false: not matched
 
 where ```type``` can be:
 
-1) Function with ```__name__``` and ```__check__``` property, i.e. the built-in type ```bool``` is defined as:
+1) Function with ```__name__``` and ```__check__``` property. 
+
+For example, the built-in type ```bool``` is defined as:
 
 ```Javascript
 function bool() {}
@@ -26,7 +28,9 @@ can be used to match employee record
 [123, 'todd', ['1354-0013-628', 'CD 5037']]
 ```
 
-2) JSON object, i.e.:
+2) JSON object.
+
+For example, 
 
 ```Javascript
 {
@@ -40,7 +44,9 @@ can be used to match employee record
 
 ```typing.check(type, data)``` will perform pattern matching between type and data based on the structure and recursively check the type of each property. 
 
-3) String, i.e.:
+3) String.
+
+For example, 
 
 ```Javascript
 // define 3x3 matrix type under the name 'matrix_3x3'

@@ -120,6 +120,9 @@ function generate_type_name(fn, args) {
         }
         name += ')';
     }
+    else if (is_json(args)) {
+        name += '(json)';
+    }
     return name;
 }
 
@@ -140,7 +143,7 @@ function is_str(arg) {
 }
 
 function is_json(arg) {
-    return "object" == typeof(arg) && !(arg instanceof Array); 
+    return null != arg && "object" == typeof(arg) && !(arg instanceof Array); 
 }
 
 function is_array(arg) {
@@ -361,10 +364,10 @@ function array(t_item) {
     if (!is_valid_type(t_item)) {
         throw new Error('Invalid element type for array: ' + t_item);
     }
-
+    
     var _array = function() {};
     
-    _array.__name__ = generate_type_name(array, t_item.__name__);
+    _array.__name__ = generate_type_name(array, t_item);
 
     _array.__check__ = function(value) {
         if (!is_array(value)) {

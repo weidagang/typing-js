@@ -66,6 +66,8 @@ function test_array(i) {
     assert(typing.check(array(array(str(3,3))), [['foo'], ['bar', 'pee', 'ijk']]), util.format('case %d.10 failed', i));
     assert(!typing.check(array, null), util.format('case %d.11 failed', i));
     assert(!typing.check(array(int), null), util.format('case %d.12 failed', i));
+    assert(typing.check(array({id : int, name : str}), [{id : 1, name : 'todd'}]), util.format('case %d.13 failed', i));
+    assert(!typing.check(array({id : int, name : str}), [{id : 1, name : 'todd'}, null]), util.format('case %d.14 failed', i));
 
     console.log(util.format('test suit %d passed', i));
 }

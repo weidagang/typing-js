@@ -122,7 +122,7 @@ var t_tree = {
     right : nullable(type('tree'))
 };
 
-// define type t_node under the name 'tree'
+// define type t_tree under the name 'tree'
 typing.define('tree', t_tree);
 
 // matched

@@ -215,6 +215,18 @@ function test_recursion(i) {
     console.log(util.format('test suit %d passed', i));
 }
 
+function test_bool(i) {
+    assert(typing.check(bool, true));
+    assert(typing.check(bool, false));
+    assert(!typing.check(bool, null));
+    assert(!typing.check(bool, ''));
+    assert(!typing.check(bool, 1));
+    assert(!typing.check(bool, []));
+    assert(!typing.check(bool, {}));
+    assert(!typing.check(bool, function(){}));
+    console.log(util.format('test suit %d passed', i));
+}
+
 // main
 try {
     test_any(1);
@@ -227,6 +239,7 @@ try {
     test_int(8);
     test_cmd_meta(9);
     test_recursion(10);
+    test_bool(11);
 
     console.log("ALL TEST CASES PASSED");
 }

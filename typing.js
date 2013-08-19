@@ -288,7 +288,7 @@ function bool() {
 bool.__name__ = 'bool';
 
 bool.__check__ = function(value) {
-    return 'boolean' == typeof(value);
+    return true === value || false === value;
 }
 
 // int: integer type

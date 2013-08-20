@@ -156,27 +156,39 @@ assert(typing.check('tree', {
 
 ####Built-in Types####
 
-1) **any**
+**any**
 
 ```any``` matches any value in JavaScript including null and undefined. 
 
 Examples:
 ```Javascript
-assert(any, null);
-assert(any, undefined);
-assert(any, 123);
-assert(any, 'hello typing.js');
-assert(any, {});
-assert(any, []);
-assert(any, function() {});
+typing.check(any, null); //true
+typing.check(any, undefined); //true
+typing.check(any, 123); //true
+typing.check(any, 'hello typing.js'); //true
+typing.check(any, {}); //true
+typing.check(any, []); //true
+typing.check(any, function(){}); //true
 ```
 
-2) **bool**
+**bool**
 
 ```bool``` matches ```true``` or ```false```.
 
 Examples:
 ```JavaScript
-assert(bool, true);
-assert(bool, false);
+typing.check(bool, true); //true
+typing.check(bool, false); //true
+```
+
+**int**
+
+```int``` matches integers. You can specify the minimal and maximal value by ```int(min)``` or ```int(min,max)```.
+
+Examples:
+```JavaScript
+typing.check(int, -103); //true, no min and max
+typing.check(int, 'hello'); //false
+typing.check(int(100), 99); //false, matches [100, ...)
+typing.check(int(0, 1000), 1000); //true, matches [0, 1000]
 ```

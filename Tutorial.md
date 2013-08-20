@@ -1,6 +1,11 @@
+###Usage###
+```JavaScript
+typing.match(type, data); // true: match; false: not matched
+```
+
 ###Built-in Types###
 
-1.**any**
+1) **any**
 
 ```any``` matches any value in JavaScript including null and undefined. 
 
@@ -15,7 +20,7 @@ assert(any, []);
 assert(any, function() {});
 ```
 
-2.**bool**
+2) **bool**
 
 ```bool``` matches ```true``` or ```false```.
 

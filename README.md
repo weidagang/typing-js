@@ -15,17 +15,17 @@ For example, the built-in type ```bool``` is defined as:
 ```Javascript
 function bool() {}
 bool.__name__ = 'bool';
-bool.__check__ = function(value) { return 'boolean' == typeof(value); }
+bool.__check__ = function(value) { return true === value || false === value; }
 ```
 
 ```typing.check(type, data)``` will call ```type.__check__(data)``` in this case. You can define your own types this way, however be aware that typing comes with a set of built-in types, which can be used to construct complex types. i.e. 
 
 ```Javascript
-tuple(int(1,10000), str(1,50), tuple(str, str)) 
+tuple(int(1,10000), bool, str(1,50), tuple(str, str)) 
 ```
 can be used to match employee record
 ```Javascript
-[123, 'todd', ['1354-0013-628', 'CD 5037']]
+[123, true, 'todd', ['1354-0013-628', 'CD 5037']]
 ```
 
 2) JSON object.

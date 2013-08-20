@@ -21,7 +21,7 @@ bool.__check__ = function(value) { return true === value || false === value; }
 ```typing.check(type, data)``` will call ```type.__check__(data)``` in this case. You can define your own types this way, however be aware that typing comes with a set of built-in types, which can be used to construct complex types. i.e. 
 
 ```Javascript
-tuple(int(1,10000), bool, str(1,50), tuple(str, str)) 
+tuple(int(1,1000), bool, str(1,50), tuple(str, str)) 
 ```
 can be used to match employee record
 ```Javascript

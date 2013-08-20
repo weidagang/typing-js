@@ -4,7 +4,7 @@
 ```Javascript
 typing.check(
     { id : int(1,1000), male : bool, name : str(1,50), contact : { phone : str, email : str }}, 
-    { id : 123, male : true, name : 'todd', contact : { phone : '82301588', email : 'todd@gmail.com' }
+    { id : 123, male : true, name : 'todd', contact : { phone : '82301588', email : 'todd@gmail.com' }}
 ); // true
 ```
 

@@ -32,13 +32,8 @@ bool.__check__ = function(value) { return true === value || false === value; }
 
 ```typing.check(type, data)``` will call ```type.__check__(data)``` in this case. You can define your own types this way, however be aware that typing comes with a set of built-in types, which can be used to construct complex types. i.e. 
 
-```Javascript
-tuple(int(1,1000), bool, str(1,50), tuple(str, str)) 
-```
-can be used to match the employee record
-```Javascript
-[123, true, 'todd', ['1354-0013-628', 'CD 5037']]
-```
+```tuple(int(1,1000), bool, str(1,50), tuple(str, str))``` matches ```[123, true, 'todd', ['1354-0013-628', 'CD 5037']]```.
+
 You can find more built-in types and their usage at [test_typing.js](https://github.com/weidagang/typing-js/blob/master/test_typing.js).
 
 2) JSON object.

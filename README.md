@@ -186,6 +186,21 @@ typing.check(bool, false); //true
 ```JavaScript
 typing.check(int, -103); //true, no min and max
 typing.check(int, 'hello'); //false
-typing.check(int(100), 99); //false, matches [100, ...)
-typing.check(int(0, 1000), 1000); //true, matches [0, 1000]
+typing.check(int(100), 99); //false, matches integer >= 100
+typing.check(int(0,1000), 1000); //true, matches integer >= 0 and <= 1000
+```
+
+**4. str**
+
+```str``` matches strings. You can specify the minimal and maximal lenght by ```str(min)``` or ```str(min,max)```. Examples:
+
+```JavaScript
+typing.check(str, null); //true
+typing.check(str, ''); //true
+typing.check(str(0), null); //true
+typing.check(str(0), ''); //true
+typing.check(str(3), 'foo'); //true, matches string with length >= 3
+typing.check(str(4), 'foo'); //false
+typing.check(str(1,3), ''); //false, matches string with length >= 1 and <= 3 
+typing.check(str(1,3), 'hello'); //false, matches string with length >= 1 and <= 3 
 ```

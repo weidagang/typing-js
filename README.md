@@ -4,11 +4,11 @@
 ```Javascript
 typing.check(str(3,10), 'hello'); //true
 
-typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@xxx.com']]); //true
+typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@mail.com']]); //true
 
 typing.check(
-    { id : int, male : bool, name : str(1,50), contact : { phone : str, email : str }}, 
-    { id : 23, male : true, name : 'todd', contact : { phone : '82301588', email : 'tood@xxx.com' }}
+    { id : int, male : bool, name : str(1,50), contact : { tel : str, email : str }}, 
+    { id : 23, male : true, name : 'todd', contact : { tel : '82301588', email : 'tood@mail.com' }}
 ); // true
 ```
 

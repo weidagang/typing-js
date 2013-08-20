@@ -1,17 +1,17 @@
 ###Typing.js: a type checking and JSON schema validation library
 
-####Usage:
-
-```Javascript
-typing.check(type, data); //true: matched; false: not matched
-```
-
-A simple example: 
+####Sample: 
 ```Javascript
 typing.check(
     { id : int(1,1000), male : bool, name : str(1,50), contact : { phone : str, email : str }}, 
     { id : 123, male : true, name : 'todd', contact : { phone : '82301588', email : 'todd@gmail.com' }
 ); // true
+```
+
+####Usage:
+
+```Javascript
+typing.check(type, data); //true: matched; false: not matched
 ```
 
 where ```type``` can be:
@@ -65,7 +65,7 @@ typing.define('matrix_3x3', tuple(tuple(int, int, int), tuple(int, int, int), tu
 assert(typing.check('matrix_3x3', [[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
 ```
 
-####Examples:
+####Define custom type:
 
 ```JavaScript
 // import module

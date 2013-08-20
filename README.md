@@ -156,7 +156,7 @@ assert(typing.check('tree', {
 
 ####Built-in Types####
 
-**any**
+**1) any**
 
 ```any``` matches any value in JavaScript including null and undefined. 
 
@@ -171,7 +171,7 @@ typing.check(any, []); //true
 typing.check(any, function(){}); //true
 ```
 
-**bool**
+**2) bool**
 
 ```bool``` matches ```true``` or ```false```.
 
@@ -181,7 +181,7 @@ typing.check(bool, true); //true
 typing.check(bool, false); //true
 ```
 
-**int**
+**3) int**
 
 ```int``` matches integers. You can specify the minimal and maximal value by ```int(min)``` or ```int(min,max)```.
 

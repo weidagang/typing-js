@@ -62,11 +62,11 @@ For example,
 For example, 
 
 ```Javascript
-// define 3x3 matrix type under the name 'matrix_3x3'
-typing.define('matrix_3x3', tuple(tuple(int, int, int), tuple(int, int, int), tuple(int, int, int)));
+// define 3x3 matrix type under the name 'matrix_3x2'
+typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, int)));
 
 // check type with the type name
-assert(typing.check('matrix_3x3', [[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
+assert(typing.check('matrix_3x3', [[11, 12], [21, 22], [31, 32]]));
 ```
 
 ####Define custom type:

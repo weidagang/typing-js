@@ -27,6 +27,7 @@ can be used to match the employee record
 ```Javascript
 [123, true, 'todd', ['1354-0013-628', 'CD 5037']]
 ```
+You can find more built-in types and their usage at [test_typing.js](https://github.com/weidagang/typing-js/blob/master/test_typing.js).
 
 2) JSON object.
 

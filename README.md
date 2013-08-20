@@ -6,6 +6,14 @@
 typing.check(type, data); //true: matched; false: not matched
 ```
 
+A simple example: 
+```Javascript
+typing.check(
+    { id : int(1,1000), male : bool, name : str(1,50), contact : { phone : str, email : str }}, 
+    { id : 123, male : true, name : 'todd', contact : { phone : '82301588', email : 'todd@gmail.com' }
+); // true
+```
+
 where ```type``` can be:
 
 1) Function with ```__name__``` and ```__check__``` property. 

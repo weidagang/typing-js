@@ -158,9 +158,8 @@ assert(typing.check('tree', {
 
 **1. any**
 
-```any``` matches any value in JavaScript including null and undefined. 
+```any``` matches any value in JavaScript including null and undefined. Examples:
 
-Examples:
 ```Javascript
 typing.check(any, null); //true
 typing.check(any, undefined); //true
@@ -173,9 +172,8 @@ typing.check(any, function(){}); //true
 
 **2. bool**
 
-```bool``` matches ```true``` or ```false```.
+```bool``` matches ```true``` or ```false```. Examples:
 
-Examples:
 ```JavaScript
 typing.check(bool, true); //true
 typing.check(bool, false); //true
@@ -183,9 +181,8 @@ typing.check(bool, false); //true
 
 **3. int**
 
-```int``` matches integers. You can specify the minimal and maximal value by ```int(min)``` or ```int(min,max)```.
+```int``` matches integers. You can specify the minimal and maximal value by ```int(min)``` or ```int(min,max)```. Examples:
 
-Examples:
 ```JavaScript
 typing.check(int, -103); //true, no min and max
 typing.check(int, 'hello'); //false

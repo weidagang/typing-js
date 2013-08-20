@@ -48,6 +48,9 @@ function test_str(i) {
     assert(!typing.check(str(0), {}), util.format('case %d.14 failed', i));
     assert(!typing.check(str, function(){}), util.format('case %d.15 failed', i));
     assert(!typing.check(str(0,1000), function(){}), util.format('case %d.16 failed', i));
+    assert(typing.check(str, undefined), util.format('case %d.17 failed', i));
+    assert(typing.check(str(0), undefined), util.format('case %d.17 failed', i));
+    assert(typing.check(str(0,0), undefined), util.format('case %d.18 failed', i));
 
     console.log(util.format('test suit %d passed', i));
 }

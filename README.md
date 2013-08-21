@@ -22,16 +22,16 @@ var tuple = typing.tuple;
 var table = typing.table;
 
 // primitive type checking
-typing.check(str(3,10), 'hello'); //true
+typing.check(str(3,10), 'hello')
 
 // composite type checking
-typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@mail.com']]); //true
+typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@mail.com']])
 
 // pattern matching
 typing.check(
     { id : int, male : bool, name : str(1,50), contact : { tel : str, email : str }}, 
     { id : 23, male : true, name : 'todd', contact : { tel : '82301588', email : 'tood@mail.com' }}
-); // true
+)
 ```
 
 ##2. Usage:

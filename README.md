@@ -39,7 +39,7 @@ typing.check(
         id : 23, 
         male : true, 
         name : 'todd', 
-        contact : { tel : '82301588', email : 'tood@mail.com' }
+        contact : { tel : '82301588', email : 'todd@mail.com' }
     }
 )
 ```

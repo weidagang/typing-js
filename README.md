@@ -31,7 +31,8 @@ typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@m
 typing.check(
     { 
         id : int, 
-        male : bool, name : str(1,50), 
+        male : bool, 
+        name : str(1,50), 
         contact : { tel : str, email : str }
     }, 
     { 

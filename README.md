@@ -1,6 +1,6 @@
 #A Quick Guide to Typing.js
 
-##Overview
+##1. Overview
 
 Typing.js is a simple, intuitive and expressive type checking and JSON schema validation library for Node.js. It goes beyond the JSON schema validation, it actually looks like a runtime type system for JavaScript. 
 
@@ -11,7 +11,7 @@ The hightlights of typing.js include:
 3. structure based pattern matching
 4. recursive type
 
-##1. Sample: 
+##2. Sample: 
 ```JavaScript
 // import module and the built-in types
 var typing = require('typing');
@@ -29,12 +29,21 @@ typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@m
 
 // pattern matching
 typing.check(
-    { id : int, male : bool, name : str(1,50), contact : { tel : str, email : str }}, 
-    { id : 23, male : true, name : 'todd', contact : { tel : '82301588', email : 'tood@mail.com' }}
+    { 
+        id : int, 
+        male : bool, name : str(1,50), 
+        contact : { tel : str, email : str }
+    }, 
+    { 
+        id : 23, 
+        male : true, 
+        name : 'todd', 
+        contact : { tel : '82301588', email : 'tood@mail.com' }
+    }
 )
 ```
 
-##2. Usage:
+##3. Usage:
 
 ```Javascript
 typing.check(type, data); //true: matched; false: not matched

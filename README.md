@@ -12,7 +12,16 @@ The hightlights of typing.js include:
 4. recursive type
 
 ##1. Sample: 
-```Javascript
+```JavaScript
+// import module and the built-in types
+var typing = require('typing');
+var int = typing.int;
+var str = typing.str;
+...
+var tuple = typing.tuple;
+var table = typing.table;
+
+
 typing.check(str(3,10), 'hello'); //true
 
 typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@mail.com']]); //true
@@ -72,18 +81,6 @@ assert(typing.check('matrix_3x3', [[11, 12], [21, 22], [31, 32]]));
 ```
 
 ##3. Define custom type:
-
-```JavaScript
-// import module
-var typing = require('typing');
-
-// import the built-in types
-var int = typing.int;
-var str = typing.str;
-...
-var tuple = typing.tuple;
-var table = typing.table;
-````
 
 **3.1. Define custom type with the built-in types**
 

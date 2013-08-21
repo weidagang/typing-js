@@ -2,7 +2,7 @@
 
 ##Overview
 
-Typing.js is a type checking and JSON schema validation library for Node.js. It's simple, intuitive and expressive. The type definition in typing.js looks pretty much like the class definition in static typing languages such as C++ and Java.
+Typing.js is a simple, intuitive and expressive type checking and JSON schema validation library for Node.js. The type definition in typing.js looks pretty much like the class definition in static typing languages such as C++ and Java.
 
 ##1. Sample: 
 ```Javascript

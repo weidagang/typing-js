@@ -1,6 +1,10 @@
-###Typing.js: a type checking and JSON schema validation library
+#A Quick Guide to Typing.js
 
-####Sample: 
+##Overview
+
+Typing.js is a type checking and JSON schema validation library for Node.js. It's simple, intuitive and expressive. The type definition in typing.js looks pretty much like the class definition in static typing languages such as C++ and Java.
+
+##1. Sample: 
 ```Javascript
 typing.check(str(3,10), 'hello'); //true
 
@@ -12,7 +16,7 @@ typing.check(
 ); // true
 ```
 
-####Usage:
+##2. Usage:
 
 ```Javascript
 typing.check(type, data); //true: matched; false: not matched
@@ -60,7 +64,7 @@ typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, i
 assert(typing.check('matrix_3x3', [[11, 12], [21, 22], [31, 32]]));
 ```
 
-####How to define custom type:
+##3. Define custom type:
 
 ```JavaScript
 // import module
@@ -74,7 +78,7 @@ var tuple = typing.tuple;
 var table = typing.table;
 ````
 
-**1. Define custom type with the built-in types**
+**3.1. Define custom type with the built-in types**
 
 ```JavaScript
 // int(1): integer >= 1;
@@ -89,7 +93,7 @@ assert(typing.check(t_employee, [123, 'todd', ['1355-0011-107', 'CD 5607']]));
 assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CD 5607']]));
 ```
 
-**2. Define custom type in JSON**
+**3.2. Define custom type in JSON**
 
 ```JavaScript
 // typing will do pattern matching based the type defined in JSON
@@ -132,7 +136,7 @@ assert(typing.check(t_response, {
 });
 ```
 
-**3. Define recursive type** 
+**3.3. Define recursive type** 
 ```Javascript
 // define a recursive binary tree type under the name 'tree'
 // nullalbe(type): extend the wrapped type to accept null value
@@ -157,7 +161,7 @@ assert(typing.check('tree', {
 }));
 ```
 
-####Built-in Types####
+##4. Built-in Types##
 
 **1. any**
 

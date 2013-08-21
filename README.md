@@ -92,8 +92,6 @@ typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, i
 assert(typing.check('matrix_3x3', [[11, 12], [21, 22], [31, 32]]));
 ```
 
-##3. Define custom type:
-
 **3.1. Define custom type with the built-in types**
 
 ```JavaScript

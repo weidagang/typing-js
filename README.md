@@ -25,7 +25,10 @@ var table = typing.table;
 typing.check(str(3,10), 'hello')
 
 // composite type checking
-typing.check(tuple(int, str, tuple(str, str)), [23, 'todd', ['82301588', 'todd@mail.com']])
+typing.check(
+    tuple(int, str, tuple(str, str)), 
+    [23, 'todd', ['82301588', 'todd@mail.com']]
+)
 
 // pattern matching
 typing.check(

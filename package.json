@@ -1,6 +1,6 @@
 {
   "name": "typing",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A type checking and JSON schema validation library",
   "main": "typeing.js",
   "scripts": {

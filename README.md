@@ -152,7 +152,7 @@ typing(t_response, {
 ```Javascript
 // define a recursive binary tree type under the name 'tree'
 // nullalbe(type): extend the wrapped type to accept null value
-// type(name): define a lazy resolved type
+// type(name): refers to a lazy resolved type
 typing.define('tree', {
     value : int,
     left : nullable(type('tree')),

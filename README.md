@@ -92,7 +92,7 @@ For example,
 typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, int)));
 
 // check type with the type name
-typing('matrix_3x3', [[11, 12], [21, 22], [31, 32]]); //true
+typing('matrix_3x2', [[11, 12], [21, 22], [31, 32]]); //true
 ```
 
 **3.1. Define custom type with the built-in types**

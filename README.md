@@ -22,7 +22,10 @@ var tuple = typing.tuple;
 var table = typing.table;
 
 // primitive type checking
+typing(bool, true) //true
+typing(int(0,10), 5) //true
 typing(str(3,10), 'hello') //true
+typing(enumeration('foo', 'bar'), 'foo') //true
 
 // composite type checking
 typing(

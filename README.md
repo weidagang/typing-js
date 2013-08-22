@@ -22,16 +22,16 @@ var tuple = typing.tuple;
 var table = typing.table;
 
 // primitive type checking
-typing.check(str(3,10), 'hello')
+typing(str(3,10), 'hello') //true
 
 // composite type checking
-typing.check(
+typing(
     tuple(int, str, tuple(str, str)), 
     [23, 'todd', ['82301588', 'todd@mail.com']]
-)
+) //true
 
 // pattern matching
-typing.check(
+typing(
     { 
         id : int, 
         male : bool, 
@@ -44,13 +44,13 @@ typing.check(
         name : 'todd', 
         contact : { tel : '82301588', email : 'todd@mail.com' }
     }
-)
+) //true
 ```
 
 ##3. Usage:
 
 ```Javascript
-typing.check(type, data); //true: matched; false: not matched
+typing(type, data); //true: matched; false: not matched
 ```
 
 where ```type``` can be:
@@ -65,7 +65,7 @@ bool.__name__ = 'bool';
 bool.__check__ = function(value) { return true === value || false === value; }
 ```
 
-```typing.check(type, data)``` will call ```type.__check__(data)``` in this case. You can define your own types this way, however, be aware that typing comes with a set of built-in types, which can be used to construct complex types. 
+```typing(type, data)``` will call ```type.__check__(data)``` in this case. You can define your own types this way, however, be aware that typing comes with a set of built-in types, which can be used to construct complex types. 
 
 2) JSON object.
 
@@ -81,7 +81,7 @@ For example,
 }
 ```
 
-```typing.check(type, data)``` will perform pattern matching between type and data based on the structure and recursively check the type of each property. 
+```typing(type, data)``` will perform pattern matching between type and data based on the structure and recursively check the type of each property. 
 
 3) String.
 
@@ -92,7 +92,7 @@ For example,
 typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, int)));
 
 // check type with the type name
-assert(typing.check('matrix_3x3', [[11, 12], [21, 22], [31, 32]]));
+typing('matrix_3x3', [[11, 12], [21, 22], [31, 32]]); //true
 ```
 
 **3.1. Define custom type with the built-in types**
@@ -103,11 +103,9 @@ assert(typing.check('matrix_3x3', [[11, 12], [21, 22], [31, 32]]));
 // tuple: array with specified type and number of elements
 var t_employee = tuple(int(1), str(1,50), tuple(str,str));
 
-// matched
-assert(typing.check(t_employee, [123, 'todd', ['1355-0011-107', 'CD 5607']]));
+typing(t_employee, [123, 'todd', ['1355-0011-107', 'CD 5607']]); //true
 
-// not matched, id must be >= 1
-assert(false == typing.check(t_employee, [0, 'todd', ['1355-0011-107', 'CD 5607']]));
+typing(t_employee, [0, 'todd', ['1355-0011-107', 'CD 5607']]); //false
 ```
 
 **3.2. Define custom type in JSON**
@@ -124,8 +122,7 @@ var t_response = {
     data : nullable(table(int(1), str(1,50), tuple(str,str)))
 };
 
-// matched
-assert(typing.check(t_response, {
+typing(t_response, {
     status : { 
         code : 200, 
         message : 'OK'
@@ -135,22 +132,20 @@ assert(typing.check(t_response, {
         [2, 'April', ['1582-0011-108', 'CA 5607']],
         [3, 'Rex', ['1522-1011-138', 'CA 1008']]
     ]
-});
+}); //true
 
-// matched
-assert(typing.check(t_response, {
+typing(t_response, {
     status : { 
         code : 404, 
         message : 'NOT FOUND'
     }
-});
+}); //true
 
-// not matched, status.message is missing
-assert(typing.check(t_response, {
+typing(t_response, {
     status : {
         code : 300
     }
-});
+}); //false, status.message is missing
 ```
 
 **3.3. Define recursive type** 
@@ -164,8 +159,7 @@ typing.define('tree', {
     right : nullable(type('tree'))
 });
 
-// matched
-assert(typing.check('tree', {
+typing('tree', {
     value : 1,
     left : {
         value : 2,
@@ -175,7 +169,7 @@ assert(typing.check('tree', {
         value : 4,
         right : { value : 5 }
     }
-}));
+}); //true
 ```
 
 ##4. Built-in Types##
@@ -185,13 +179,13 @@ assert(typing.check('tree', {
 ```any``` matches any value in JavaScript including null and undefined. Examples:
 
 ```Javascript
-typing.check(any, null); //true
-typing.check(any, undefined); //true
-typing.check(any, 123); //true
-typing.check(any, 'hello typing.js'); //true
-typing.check(any, {}); //true
-typing.check(any, []); //true
-typing.check(any, function(){}); //true
+typing(any, null); //true
+typing(any, undefined); //true
+typing(any, 123); //true
+typing(any, 'hello typing.js'); //true
+typing(any, {}); //true
+typing(any, []); //true
+typing(any, function(){}); //true
 ```
 
 **2. bool**
@@ -199,8 +193,8 @@ typing.check(any, function(){}); //true
 ```bool``` matches ```true``` or ```false```. Examples:
 
 ```JavaScript
-typing.check(bool, true); //true
-typing.check(bool, false); //true
+typing(bool, true); //true
+typing(bool, false); //true
 ```
 
 **3. int**
@@ -208,10 +202,10 @@ typing.check(bool, false); //true
 ```int``` matches integers. You can specify the minimal and maximal value by ```int(min)``` or ```int(min,max)```. Examples:
 
 ```JavaScript
-typing.check(int, -103); //true, no min and max
-typing.check(int, 'hello'); //false
-typing.check(int(100), 99); //false, matches integer >= 100
-typing.check(int(0,1000), 1000); //true, matches integer >= 0 and <= 1000
+typing(int, -103); //true, no min and max
+typing(int, 'hello'); //false
+typing(int(100), 99); //false, matches integer >= 100
+typing(int(0,1000), 1000); //true, matches integer >= 0 and <= 1000
 ```
 
 **4. str**
@@ -219,12 +213,12 @@ typing.check(int(0,1000), 1000); //true, matches integer >= 0 and <= 1000
 ```str``` matches strings. You can specify the minimal and maximal lenght by ```str(min)``` or ```str(min,max)```. Examples:
 
 ```JavaScript
-typing.check(str, null); //true
-typing.check(str, ''); //true
-typing.check(str(0), null); //true
-typing.check(str(0), ''); //true
-typing.check(str(3), 'foo'); //true, matches string with length >= 3
-typing.check(str(4), 'foo'); //false
-typing.check(str(1,3), ''); //false, matches string with length >= 1 and <= 3 
-typing.check(str(1,3), 'hello'); //false, matches string with length >= 1 and <= 3 
+typing(str, null); //true
+typing(str, ''); //true
+typing(str(0), null); //true
+typing(str(0), ''); //true
+typing(str(3), 'foo'); //true, matches string with length >= 3
+typing(str(4), 'foo'); //false
+typing(str(1,3), ''); //false, matches string with length >= 1 and <= 3 
+typing(str(1,3), 'hello'); //false, matches string with length >= 1 and <= 3 
 ```

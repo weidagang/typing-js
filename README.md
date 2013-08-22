@@ -176,7 +176,7 @@ typing('tree', {
 
 **1. any**
 
-```any``` matches any value in JavaScript including null and undefined. Examples:
+```any``` matches any value in JavaScript including null and undefined. 
 
 ```Javascript
 typing(any, null); //true
@@ -190,7 +190,7 @@ typing(any, function(){}); //true
 
 **2. bool**
 
-```bool``` matches ```true``` or ```false```. Examples:
+```bool``` matches ```true``` or ```false```.
 
 ```JavaScript
 typing(bool, true); //true
@@ -199,7 +199,7 @@ typing(bool, false); //true
 
 **3. int**
 
-```int``` matches integers. You can specify the minimal and maximal value by ```int(min)``` or ```int(min,max)```. Examples:
+```int``` matches integers. You can specify the minimal and maximal value by ```int(min)``` or ```int(min,max)```.
 
 ```JavaScript
 typing(int, -103); //true, no min and max
@@ -210,7 +210,7 @@ typing(int(0,1000), 1000); //true, matches integer >= 0 and <= 1000
 
 **4. str**
 
-```str``` matches strings. You can specify the minimal and maximal lenght by ```str(min)``` or ```str(min,max)```. Examples:
+```str``` matches strings. You can specify the minimal and maximal lenght by ```str(min)``` or ```str(min,max)```.
 
 ```JavaScript
 typing(str, null); //true

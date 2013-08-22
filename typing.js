@@ -445,23 +445,27 @@ function table() {
 
 
 //++++ module exports
-module.exports = {
-    'define' : define,
-    'check' : check,
-    'type' : type,
+var typing = function(type, value) {
+    return check(type, value); 
+};
 
-    'and' : and,
-    'or' : or,
+typing.define = define;
+typing.check= check;
+typing.type = type;
 
-    'any' : any,
-    'nullable' : nullable,
-    'bool' : bool,
-    'str' : str,
-    'int' : int,
-    'oneof' : oneof,
-    'func' : func,
-    'array' : array,
-    'tuple' : tuple,
-    'table' : table
-}
+typing.and = and;
+typing.or = or;
+
+typing.any = any;
+typing.nullable = nullable;
+typing.bool = bool;
+typing.int = int;
+typing.str = str;
+typing.oneof = oneof;
+typing.func = func;
+typing.array = array;
+typing.tuple = tuple;
+typing.table = table;
+
+module.exports = typing;
 //---- module exports

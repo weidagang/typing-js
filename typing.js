@@ -330,23 +330,23 @@ int.__check__ = function(value) {
     return null != value && is_int(value);
 }
 
-// oneof: enumeration
-function oneof() {
+// enumeration: enumeration type
+function enumeration() {
     var _args = arguments;
-    var _oneof = function() {}; 
+    var _enumeration = function() {}; 
     
-    _oneof.__name__ = generate_type_name(oneof, _args);
+    _enumeration.__name__ = generate_type_name(enumeration, _args);
 
-    _oneof.__check__ = function(value) {
+    _enumeration.__check__ = function(value) {
         for (var i in _args) {
-            if (_args[i] == value) {
+            if (_args[i] === value) {
                 return true;
             }
         }
         return false;
     };
 
-    return _oneof;
+    return _enumeration;
 }
 
 // func: function type
@@ -461,7 +461,7 @@ typing.nullable = nullable;
 typing.bool = bool;
 typing.int = int;
 typing.str = str;
-typing.oneof = oneof;
+typing.enumeration = enumeration;
 typing.func = func;
 typing.array = array;
 typing.tuple = tuple;

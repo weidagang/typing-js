@@ -7,7 +7,7 @@ Typing.js is a simple, intuitive and expressive type checking and JSON schema va
 **Features:**
 
 1. a set of commonly used built-in types, i.e. int, str, array, tuple, table;
-2. C++ template like type definition with array, tuple and table;
+2. C++ template style type definition with array, tuple and table;
 3. structure based pattern matching
 4. recursive type
 

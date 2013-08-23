@@ -32,6 +32,7 @@ try {
     var test_recursive = require('./test_recursive.js');
     var test_composite = require('./test_composite.js');
     var test_enumeration = require('./test_enumeration.js');
+    var test_char = require('./test_char.js');
 
     test_any(1);
     test_str(2);
@@ -45,6 +46,7 @@ try {
     test_bool(11);
     test_composite(12);
     test_enumeration(13);
+    test_char(14);
 
     console.log("ALL TEST CASES PASSED");
 }

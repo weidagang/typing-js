@@ -284,6 +284,12 @@ str.__check__ = function(value) {
     return null == value || is_str(value)    
 };
 
+// char: char type
+function char() {
+}
+char.__name__ = 'char';
+char.__check__ = str(1,1).__check__;
+
 // bool: bool type
 function bool() {
 }
@@ -460,6 +466,7 @@ typing.any = any;
 typing.nullable = nullable;
 typing.bool = bool;
 typing.int = int;
+typing.char = char;
 typing.str = str;
 typing.enumeration = enumeration;
 typing.func = func;

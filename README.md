@@ -257,3 +257,11 @@ typing(array(str(3,3)), [1, 'bar', 'pee', 'ijk']); //false
 **6. tuple**
 
 ```tuple``` matches array objects with specified number and type of elements.
+
+```JavaScript
+typing(tuple(int, str), [123, 'todd']); //true
+typing(tuple(int(1,100), str(1,100), tuple(str(11, 11), str(1))), 
+    [100, 'foobar', ['13550013607', 'Tianfu Software Park C2']]); //true
+typing(tuple(int(1,100), str(1,100), {phone : str, address : str}), 
+    [23, 'todd', {phone : '13550013607', address : 'CD 5037'}]); //true
+```

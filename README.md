@@ -226,3 +226,34 @@ typing(str(4), 'foo'); //false
 typing(str(1,3), ''); //false, matches string with length >= 1 and <= 3 
 typing(str(1,3), 'hello'); //false, matches string with length >= 1 and <= 3 
 ```
+
+**5. enumeration**
+
+```enumeration``` matches one of the values.
+
+```JavaScript
+typing(enumeration('Saturday', 'Sunday'), 'Sunday'); //true
+typing(enumeration('Saturday', 'Sunday'), 'Friday'); //false
+typing(enumeration(1, 2, 3), 2); //true
+typing(enumeration(1, 2, 3), 5); //false
+```
+
+**6. array**
+
+```array``` matches array objects. You can specify the element type of the array.
+
+```JavaScript
+typing(array, []); //true
+typing(array, [1, 'foo', {}, null]); //true
+typing(array(str(3,3)), ['foo', 'bar', 'pee', 'ijk']); //true
+typing(array(array(str(3,3))), [['foo'], ['bar', 'pee', 'ijk']]); //true
+typing(array({id : int, name : str}), [{id : 1, name : 'todd'}]); //true
+typing(array, null); //false
+typing(array(str(3,3)), ['fooo', 'barr', 'pee', 'ijk']); //false
+typing(array(str(3,3)), [1, 'bar', 'pee', 'ijk']); //false
+```
+
+
+**6. tuple**
+
+```tuple``` matches array objects with specified number and type of elements.

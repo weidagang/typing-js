@@ -7,11 +7,11 @@ Typing.js is a simple, intuitive and expressive type checking and JSON schema va
 **Features:**
 
 1. a set of commonly used built-in types, i.e. int, str, array, tuple, table;
-2. C++ template style type definition with array, tuple and table;
+2. C++ template style type definition;
 3. structure based pattern matching
 4. recursive type
 
-##2. Sample: 
+**Samples:** 
 ```JavaScript
 // import module and the built-in types
 var typing = require('typing');
@@ -51,7 +51,7 @@ typing(
 ) //true
 ```
 
-##3. Usage:
+##2. Usage:
 
 ```Javascript
 typing(type, data); //true: matched; false: not matched
@@ -99,7 +99,7 @@ typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, i
 typing('matrix_3x2', [[11, 12], [21, 22], [31, 32]]); //true
 ```
 
-**3.1. Define custom type with the built-in types**
+**2.1. Define custom type with the built-in types**
 
 ```JavaScript
 // int(1): integer >= 1;
@@ -112,7 +112,7 @@ typing(t_employee, [123, 'todd', ['1355-0011-107', 'CD 5607']]); //true
 typing(t_employee, [0, 'todd', ['1355-0011-107', 'CD 5607']]); //false
 ```
 
-**3.2. Define custom type in JSON**
+**2.2. Define custom type in JSON**
 
 ```JavaScript
 // typing will do pattern matching based the type defined in JSON
@@ -152,7 +152,7 @@ typing(t_response, {
 }); //false, status.message is missing
 ```
 
-**3.3. Define recursive type** 
+**2.3. Define recursive type** 
 ```Javascript
 // define a recursive binary tree type under the name 'tree'
 // nullalbe(type): extend the wrapped type to accept null value
@@ -176,7 +176,7 @@ typing('tree', {
 }); //true
 ```
 
-##4. Built-in Types##
+##3. Built-in Types##
 
 **1. any**
 
@@ -254,7 +254,7 @@ typing(array(str(3,3)), [1, 'bar', 'pee', 'ijk']); //false
 ```
 
 
-**6. tuple**
+**7. tuple**
 
 ```tuple``` matches array objects with specified number and type of elements.
 

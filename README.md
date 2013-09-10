@@ -266,3 +266,14 @@ typing(tuple(int(1,100), str(1,100), {phone : str, address : str}),
     [23, 'todd', {phone : '13550013607', address : 'CD 5037'}]); //true
 typing(tuple(str), null); //false
 ```
+
+
+**8. table**
+
+```table(type1, type2 ...) is equivalent to array(tuple(type1, type2 ...), which matches tabular data.
+
+```JavaScript
+typing(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'p', null]]); //true
+typing(table(int(1,100), str(1,1), str), null); //false
+typing(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'port', null]]); //false
+```

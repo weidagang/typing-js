@@ -12,6 +12,7 @@ Typing.js is a simple, intuitive and expressive type checking and JSON schema va
 4. recursive type
 
 **Samples:** 
+
 ```JavaScript
 // import module and the built-in types
 var typing = require('typing');
@@ -51,7 +52,7 @@ typing(
 ) //true
 ```
 
-##2. Usage:
+**Usage:**
 
 ```Javascript
 typing(type, data); //true: matched; false: not matched
@@ -98,6 +99,8 @@ typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, i
 // check type with the type name
 typing('matrix_3x2', [[11, 12], [21, 22], [31, 32]]); //true
 ```
+
+##2. How to define type?
 
 **2.1. Define custom type with the built-in types**
 

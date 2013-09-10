@@ -1,6 +1,6 @@
 {
   "name": "typing",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A type checking and JSON schema validation library",
   "main": "typeing.js",
   "scripts": {
@@ -26,5 +26,11 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/weidagang/typing-js/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
   }
 }

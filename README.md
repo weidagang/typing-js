@@ -100,7 +100,7 @@ typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, i
 typing('matrix_3x2', [[11, 12], [21, 22], [31, 32]]); //true
 ```
 
-##2. How to define type?
+##2. How to define types?
 
 **2.1. Define custom type with the built-in types**
 

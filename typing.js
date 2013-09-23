@@ -20,6 +20,10 @@ function define(name, definition) {
     types[name] = definition;
 }
 
+// match value agains the type
+function match(type, value) {
+}
+
 // check type 
 function check(type, value) { 
     //console.log("+check(), type=%s, value=%s", util.inspect(type), util.inspect(value));
@@ -336,6 +340,42 @@ int.__check__ = function(value) {
     return null != value && is_int(value);
 }
 
+// num: number type
+function num(min, max) {
+    var _args = arguments;
+    var _num = function() {};
+    
+    _num.__name__ = generate_type_name(num, _args);
+
+    _num.__check__ = function(value) {
+        if (null == value) {
+            return false;
+        }
+
+        if (!is_num(value)) {
+            return false;
+        }
+
+        if (null != min && value < min) {
+            return false;
+        }
+
+        if (null != max && value > max) {
+            return false;
+        }
+
+        return true;
+    };
+
+    return _num;
+}
+
+num.__name__ = 'num';
+
+num.__check__ = function(value) {
+    return null != value && is_num(value);
+}
+
 // enumeration: enumeration type
 function enumeration() {
     var _args = arguments;
@@ -466,6 +506,7 @@ typing.any = any;
 typing.nullable = nullable;
 typing.bool = bool;
 typing.int = int;
+typing.num = num;
 typing.char = char;
 typing.str = str;
 typing.enumeration = enumeration;

@@ -2,16 +2,17 @@
 
 ##1. Overview
 
-Typing.js is a simple, intuitive and expressive type checking and JSON schema validation library for Node.js. It goes beyond the JSON schema validation, it actually looks like a runtime type system for JavaScript. 
+Typing.js is an expressive and intuitive type checking and JSON schema validation library for Node.js. It goes beyond the JSON schema validation, it actually looks like a runtime type system for JavaScript. 
 
 **Features:**
 
 1. a set of commonly used built-in types, i.e. int, str, array, tuple, table;
-2. C++ template style type definition with array, tuple and table;
+2. C++ template style type definition;
 3. structure based pattern matching
 4. recursive type
 
-##2. Sample: 
+**Samples:** 
+
 ```JavaScript
 // import module and the built-in types
 var typing = require('typing');
@@ -51,7 +52,7 @@ typing(
 ) //true
 ```
 
-##3. Usage:
+**Usage:**
 
 ```Javascript
 typing(type, data); //true: matched; false: not matched
@@ -99,7 +100,9 @@ typing.define('matrix_3x2', tuple(tuple(int, int), tuple(int, int), tuple(int, i
 typing('matrix_3x2', [[11, 12], [21, 22], [31, 32]]); //true
 ```
 
-**3.1. Define custom type with the built-in types**
+##2. How to define types?
+
+**2.1. Define custom type with the built-in types**
 
 ```JavaScript
 // int(1): integer >= 1;
@@ -112,7 +115,7 @@ typing(t_employee, [123, 'todd', ['1355-0011-107', 'CD 5607']]); //true
 typing(t_employee, [0, 'todd', ['1355-0011-107', 'CD 5607']]); //false
 ```
 
-**3.2. Define custom type in JSON**
+**2.2. Define custom type in JSON**
 
 ```JavaScript
 // typing will do pattern matching based the type defined in JSON
@@ -152,7 +155,7 @@ typing(t_response, {
 }); //false, status.message is missing
 ```
 
-**3.3. Define recursive type** 
+**2.3. Define recursive type** 
 ```Javascript
 // define a recursive binary tree type under the name 'tree'
 // nullalbe(type): extend the wrapped type to accept null value
@@ -176,7 +179,7 @@ typing('tree', {
 }); //true
 ```
 
-##4. Built-in Types##
+##3. Built-in Types##
 
 **1. any**
 
@@ -212,7 +215,18 @@ typing(int(100), 99); //false, matches integer >= 100
 typing(int(0,1000), 1000); //true, matches integer >= 0 and <= 1000
 ```
 
-**4. str**
+**4. num**
+
+```num``` matches numbers. You can specify the minimal and maximal value by ```num(min)``` or ```num(min,max)```.
+
+```JavaScript
+typing(num, -10.3); //true, no min and max
+typing(num, 'hello'); //false
+typing(num(100), 99.9); //false, matches num >= 100
+typing(num(0,51), 25.9); //true, matches num >= 0 and <= 51 
+```
+
+**5. str**
 
 ```str``` matches strings. You can specify the minimal and maximal lenght by ```str(min)``` or ```str(min,max)```.
 
@@ -227,7 +241,7 @@ typing(str(1,3), ''); //false, matches string with length >= 1 and <= 3
 typing(str(1,3), 'hello'); //false, matches string with length >= 1 and <= 3 
 ```
 
-**5. enumeration**
+**6. enumeration**
 
 ```enumeration``` matches one of the values.
 
@@ -238,7 +252,7 @@ typing(enumeration(1, 2, 3), 2); //true
 typing(enumeration(1, 2, 3), 5); //false
 ```
 
-**6. array**
+**7. array**
 
 ```array``` matches array objects. You can specify the element type of the array.
 
@@ -254,7 +268,7 @@ typing(array(str(3,3)), [1, 'bar', 'pee', 'ijk']); //false
 ```
 
 
-**6. tuple**
+**8. tuple**
 
 ```tuple``` matches array objects with specified number and type of elements.
 
@@ -265,4 +279,15 @@ typing(tuple(int(1,100), str(1,100), tuple(str(11, 11), str(1))),
 typing(tuple(int(1,100), str(1,100), {phone : str, address : str}), 
     [23, 'todd', {phone : '13550013607', address : 'CD 5037'}]); //true
 typing(tuple(str), null); //false
+```
+
+
+**9. table**
+
+```table(type1, type2 ...) is equivalent to array(tuple(type1, type2 ...), which matches tabular data.
+
+```JavaScript
+typing(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'p', null]]); //true
+typing(table(int(1,100), str(1,1), str), null); //false
+typing(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'port', null]]); //false
 ```

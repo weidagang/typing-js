@@ -284,7 +284,7 @@ typing(tuple(str), null); //false
 
 **9. table**
 
-```table(type1, type2 ...) is equivalent to array(tuple(type1, type2 ...), which matches tabular data.
+```table(type1, type2 ...)``` is equivalent to ```array(tuple(type1, type2 ...)```, which matches tabular data.
 
 ```JavaScript
 typing(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'p', null]]); //true

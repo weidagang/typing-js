@@ -4,7 +4,7 @@
   "description": "A type checking and JSON schema validation library",
   "main": "typeing.js",
   "scripts": {
-    "test": "test_typing.js"
+    "test": "test/test_typing.js"
   },
   "repository": {
     "type": "git",

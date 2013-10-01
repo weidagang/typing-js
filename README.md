@@ -215,7 +215,18 @@ typing(int(100), 99); //false, matches integer >= 100
 typing(int(0,1000), 1000); //true, matches integer >= 0 and <= 1000
 ```
 
-**4. str**
+**4. num**
+
+```num``` matches numbers. You can specify the minimal and maximal value by ```num(min)``` or ```num(min,max)```.
+
+```JavaScript
+typing(num, -10.3); //true, no min and max
+typing(num, 'hello'); //false
+typing(num(100), 99.9); //false, matches num >= 100
+typing(num(0,51), 25.9); //true, matches num >= 0 and <= 51 
+```
+
+**5. str**
 
 ```str``` matches strings. You can specify the minimal and maximal lenght by ```str(min)``` or ```str(min,max)```.
 
@@ -230,7 +241,7 @@ typing(str(1,3), ''); //false, matches string with length >= 1 and <= 3
 typing(str(1,3), 'hello'); //false, matches string with length >= 1 and <= 3 
 ```
 
-**5. enumeration**
+**6. enumeration**
 
 ```enumeration``` matches one of the values.
 
@@ -241,7 +252,7 @@ typing(enumeration(1, 2, 3), 2); //true
 typing(enumeration(1, 2, 3), 5); //false
 ```
 
-**6. array**
+**7. array**
 
 ```array``` matches array objects. You can specify the element type of the array.
 
@@ -257,7 +268,7 @@ typing(array(str(3,3)), [1, 'bar', 'pee', 'ijk']); //false
 ```
 
 
-**7. tuple**
+**8. tuple**
 
 ```tuple``` matches array objects with specified number and type of elements.
 
@@ -271,9 +282,9 @@ typing(tuple(str), null); //false
 ```
 
 
-**8. table**
+**9. table**
 
-```table(type1, type2 ...) is equivalent to array(tuple(type1, type2 ...), which matches tabular data.
+```table(type1, type2 ...)``` is equivalent to ```array(tuple(type1, type2 ...)```, which matches tabular data.
 
 ```JavaScript
 typing(table(int(1,100), str(1,1), str), [[1, 'h', 'host'], [2, 'p', null]]); //true

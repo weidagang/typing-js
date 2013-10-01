@@ -10,6 +10,7 @@ var any = typing.any;
 var nullable = typing.nullable;
 var func = typing.func;
 var int = typing.int;
+var num = typing.num;
 var bool = typing.bool;
 var str = typing.str;
 var array = typing.array;
@@ -33,6 +34,7 @@ try {
     var test_composite = require('./test_composite.js');
     var test_enumeration = require('./test_enumeration.js');
     var test_char = require('./test_char.js');
+    var test_num = require('./test_num.js');
 
     test_any(1);
     test_str(2);
@@ -47,6 +49,7 @@ try {
     test_composite(12);
     test_enumeration(13);
     test_char(14);
+    test_num(15);
 
     console.log("ALL TEST CASES PASSED");
 }
